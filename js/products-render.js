@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
       card.innerHTML = `
         <a href="#" class="js-open-modal" draggable="false">
           <div class="video-image">
-            <img src="${product.image}?v=20261118-fast-render" alt="${product.title}" loading="eager" decoding="async">
+            <img src="${product.image}?v=20261118-fast-render" alt="${product.title}" loading="lazy" decoding="async">
             <span class="tag">${product.category}</span>
           </div>
           <h3>${product.title}</h3>

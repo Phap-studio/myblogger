@@ -66,7 +66,7 @@ body {
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
+@media (min-width: 48rem) and (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
   }
@@ -904,6 +904,31 @@ body#top:has(> .wrapper > .page--home) .about__sunbeam::after {
 }
 
 @media (max-width: 47.99875rem) {
+  /* Keep phone scrolling native and stop costly continuous Shop effects. */
+  html,
+  body {
+    scroll-behavior: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .shop-page .hero,
+  .shop-page .hero::before,
+  .shop-page .hero::after,
+  body.shop-page-body .hero,
+  body.shop-page-body .hero::before,
+  body.shop-page-body .hero::after {
+    animation: none !important;
+  }
+
+  .shop-page .hero,
+  body.shop-page-body .hero {
+    background-size: auto !important;
+  }
+
+  body#top:has(> .wrapper > .page--home) .about__scroll-cue svg {
+    animation: none !important;
+  }
+
   body#top:has(> .wrapper > .page--home) .about__sunbeam {
     opacity: 0.96 !important;
     background-image:
