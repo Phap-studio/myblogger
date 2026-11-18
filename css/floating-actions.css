@@ -1,0 +1,191 @@
+/* ==========================================================================
+   Floating Action Buttons
+   ========================================================================== */
+/* This class now acts as a simple container within the navbar */
+.floating-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Khoảng cách giữa 2 nút */ 
+  /* The buttons are now part of the navbar, so they don't need to be pushed to the right.
+     The parent flex container (.menu) will handle the alignment. */
+  transform: translateX(-10rem); /* Default for Home page (desktop, not scrolled) */
+  transition: transform 0.2s ease; /* Thêm transition để dịch chuyển mượt mà khi cuộn */
+}
+
+/* On Shop & Coming Up pages, disable all horizontal transforms to allow flexbox alignment */
+body.shop-page-body .floating-actions,
+body.coming-up-page-body .floating-actions {
+  transform: none !important;
+}
+
+/* Shop and Coming Up keep these controls as direct children of the header.
+   Position them explicitly so they remain in the navbar instead of flowing
+   onto a new line underneath it. */
+body.shop-page-body .header .floating-actions,
+body.coming-up-page-body .header .floating-actions {
+  position: absolute;
+  top: 50%;
+  right: clamp(1rem, 4vw, 4.5rem);
+  z-index: 2;
+  transform: translateY(-50%) !important;
+}
+
+/* The Shop page uses a clean, links-only navigation. */
+body.shop-page-body .floating-actions {
+  display: none !important;
+}
+
+/* Khi header được cuộn và cố định (.--header-scroll), điều chỉnh lại vị trí của các icon */
+@media (min-width: 47.99875em) {
+  /* Reset transform for Shop and Coming Up pages */
+  body.shop-page-body .floating-actions,
+  body.coming-up-page-body .floating-actions {
+    transform: none; /* Allow flexbox to position naturally */
+  }
+
+  [data-fls-header-scroll].--header-scroll .floating-actions {
+    /* Đẩy các icon qua phải để tạo khoảng cách với menu, thay vì kéo qua trái */
+    transform: translateX(1.5rem);
+  }
+}
+.floating-actions.visible {
+}
+.fab-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  width: 44px; /* Slightly larger for better visual weight */
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #e0e0e0;
+  transition: color 300ms ease, transform 300ms ease, filter 300ms ease;
+  /* Start with no glow */
+  filter: drop-shadow(0 0 0px hsla(43, 100%, 84%, 0));
+}
+
+.fab-btn svg {
+  width: 24px; /* Slightly larger icon */
+  height: 24px;
+  fill: currentColor;
+}
+
+.fab-btn:hover {
+  color: #ffe8af; /* Golden color from nav link hover */
+  transform: scale(1.08);
+  /* Add a soft golden glow on hover */
+  filter: drop-shadow(0 0 8px hsla(43, 100%, 84%, 0.5));
+}
+
+.fab-btn:active {
+  transform: scale(0.95);
+  transition-duration: 100ms;
+}
+
+
+/* ==========================================================================
+   Notification Login Modal (Independent)
+   ========================================================================== */
+
+.notification-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.65); /* Slightly darker overlay */
+  display: grid;
+  place-items: center;
+  z-index: 1010; /* Above FABs */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 200ms ease, visibility 0s 200ms;
+}
+
+.notification-modal-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 200ms ease, visibility 0s;
+}
+
+.notification-modal-content {
+  background-color: #242424;
+  color: #e0e0e0;
+  width: min(90%, 440px);
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+  position: relative;
+  transform: scale(0.98);
+  transition: transform 200ms cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.notification-modal-overlay.visible .notification-modal-content {
+  transform: scale(1);
+}
+
+.notification-modal-content h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  color: #fff;
+}
+
+.notification-modal-content p {
+  color: #a0a0a0;
+  margin: 0 0 2rem;
+  line-height: 1.5;
+}
+
+.notification-modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  font-size: 1.75rem;
+  color: #8a8a8a;
+  cursor: pointer;
+  background: none;
+  border: none;
+  line-height: 1;
+  padding: 0.5rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.notification-modal-close:hover {
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+.notification-modal-actions {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.notification-modal-button {
+  flex: 1; height: 40px; padding: 0 1.5rem; border-radius: 8px; font-weight: 700; cursor: pointer; transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.notification-modal-button.secondary { background-color: #3a3a3a; color: #c7c7c7; }
+.notification-modal-button.secondary:hover { background-color: #4a4a4a; transform: translateY(-1px); }
+.notification-modal-button.primary { background-color: #4e463a; color: #fff; }
+.notification-modal-button.primary:hover { background-color: #615849; transform: translateY(-1px); }
+
+/* Profile Choice Modal Button Styles */
+#profile-modal-register-btn { background-color: #3a3a3a; color: #c7c7c7; }
+#profile-modal-register-btn:hover { background-color: #4a4a4a; }
+#profile-modal-login-btn { background-color: #4e463a; color: #fff; }
+#profile-modal-login-btn:hover { background-color: #615849; }
+
+/* Desktop hover feedback without animating blur-based filters. */
+@media (any-hover: hover) and (pointer: fine) {
+  .fab-btn {
+    transition: color 150ms ease-out, transform 150ms ease-out;
+    filter: none;
+    will-change: auto;
+  }
+
+  .fab-btn:hover {
+    filter: none;
+    box-shadow: 0 0 0 1px rgba(255, 232, 175, 0.32);
+  }
+}

@@ -1,0 +1,76 @@
+/* TVP BLOGGER - giao diện menu mobile dùng chung (xem js/mobile-menu.js) */
+
+/* Panel chỉ hoạt động khi nút 3 gạch đang hiển thị (JS gắn class tvp-menu-active) */
+#tvp-mobile-menu {
+  display: none;
+}
+
+html.tvp-menu-active #tvp-mobile-menu {
+  position: fixed;
+  top: 76px; /* JS sẽ cập nhật theo chiều cao header thực tế */
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 20px 16px 26px;
+  background: rgba(10, 10, 10, 0.97);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.45);
+
+  /* Hiệu ứng trượt + mờ khi mở/đóng */
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0.25s;
+}
+
+html.tvp-menu-active #tvp-mobile-menu.open {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s;
+}
+
+#tvp-mobile-menu a {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  padding: 12px 8px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: 'Montserrat', 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+#tvp-mobile-menu a:hover,
+#tvp-mobile-menu a:focus-visible {
+  color: #84e4de;
+}
+
+#tvp-mobile-menu a[aria-current='page'] {
+  color: #84e4de;
+}
+
+/* Tránh hiện trùng menu gốc của template khi menu mới đang hoạt động */
+html.tvp-menu-active .header .menu__body {
+  display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.tvp-menu-active #tvp-mobile-menu,
+  html.tvp-menu-active #tvp-mobile-menu.open {
+    transition: none;
+  }
+}

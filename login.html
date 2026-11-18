@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Đăng nhập - 𝐓𝐕𝐏 𝐁𝐋𝐎𝐆𝐆𝐄𝐑</title>
+  <link href='./assets/img/logo.png' rel='icon' type='image/png' style="border-radius: 40px;">
+
+  <!-- Main Styles -->
+  <link rel="stylesheet" href="./css/index.min.css">
+  <link rel="stylesheet" href="./css/responsive.css?v=20261118-shared-assets">
+  <link rel="stylesheet" href="./css/tvp-footer.css">
+
+  <!-- Page-specific Styles -->
+  <link rel="stylesheet" href="./css/login.css?v=20261118-shared-assets">
+  <link rel="stylesheet" href="./css/notification.css">
+</head>
+<body id="top" class="login-page-body">
+  <div class="wrapper">
+    <!-- Header -->
+    <header data-fls-header class="header" data-fls-header-scroll>
+      <div class="header__background"></div>
+      <div class="header__wrapper">
+        <div class="header__container">
+          <div class="header__menu menu">
+            <div class="menu__left-side">
+              <a class="menu__btn btn" href="./index.html" aria-label="TVP Blogger">
+                <img class="menu__brand-logo" src="./assets/img/logo.png" alt="TVP Blogger">
+              </a>
+            </div>
+            <div class="menu__body-wrapper">
+              <nav class="menu__body" aria-label="Primary navigation">
+                <ul class="menu__list">
+                  <li class="menu__item"><a href="./index.html" class="menu__link">Home</a></li>
+                  <li class="menu__item"><a href="./shop.html" class="menu__link">Shop</a></li>
+                  <li class="menu__item"><a href="./Coming Up.html" class="menu__link">Coming Up</a></li>
+                  <li class="menu__item"><a href="./feedback.html" class="menu__link">Feedback</a></li>
+                </ul>
+              </nav>
+              <div class="menu__action">
+                <div class="menu__audio-icon"></div>
+                <button type="button" data-fls-menu class="menu__icon icon-menu" aria-label="Toggle menu"><span></span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="login-main">
+      <div class="login-container">
+        <!-- Step 1: Email View -->
+        <div id="email-view">
+          <h1 class="login-title">Đăng Ký Hoặc Đăng Nhập Bằng Email</h1>
+          <form class="login-form" id="email-form" action="#">
+            <div class="form-group">
+              <label for="email-input">Email</label>
+              <input type="email" id="email-input" class="form-input" placeholder="Nhập email của bạn" required>
+            </div>
+            <button type="submit" class="login-submit-btn">Tiếp tục</button>
+          </form>
+          <div class="back-link-container">
+            <a href="#" id="back-from-email" class="back-link">← Quay lại trang trước</a>
+          </div>
+        </div>
+
+        <!-- Step 2: Password View (Initially Hidden) -->
+        <div id="password-view" style="display: none;">
+          <h1 class="login-title">Chào mừng bạn trở lại!</h1>
+          <p class="login-subtitle">Đăng nhập bằng <strong id="user-email-display"></strong></p>
+          <form class="login-form" id="password-form" action="#">
+            <div class="form-group">
+              <label for="password-input">Mật khẩu</label>
+              <div class="password-wrapper">
+                <input type="password" id="password-input" class="form-input" placeholder="Vui lòng nhập mật khẩu của bạn" required>
+                <button type="button" id="toggle-password" class="toggle-password" aria-label="Hiện mật khẩu"></button>
+              </div>
+            </div>
+            <div class="form-options">
+              <label class="checkbox-label"><input type="checkbox" id="remember-me"> Duy trì trạng thái đăng nhập</label>
+              <a href="./forgot-password.html" class="forgot-password-link">Quên mật khẩu?</a>
+            </div>
+            <button type="submit" class="login-submit-btn">Đăng nhập</button>
+          </form>
+          <div class="back-link-container">
+            <a href="#" id="back-from-password" class="back-link">← Quay lại để thay đổi email</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer is reused from the main layout -->
+    <footer class="tvp-site-footer">
+      <div class="tvp-footer__content">
+        <p class="tvp-footer__copyright">©️ 2026 TVP-BLOGGER. All rights reserved</p>
+        <p class="tvp-footer__copyright">©️2026 TVP BLOGGER, LTD ALL RIGHTS RESERVED.UNAUTHORIZED COMMERCIAL USE OR PUBLICATION</p>
+        <div class="tvp-footer__details">
+          <span>Ho Chi Minh City, Viet Nam</span><span>Hotline: (+84) 912 665 729</span><span>Email: vuongphap0990@gmail.com</span><span>24/7 online days</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module">
+    import { showNotification } from './js/notification.js';
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const emailView = document.getElementById('email-view');
+      const passwordView = document.getElementById('password-view');
+      const emailForm = document.getElementById('email-form');
+      const passwordForm = document.getElementById('password-form');
+      const emailInput = document.getElementById('email-input');
+      const userEmailDisplay = document.getElementById('user-email-display'); // In password view
+      const passwordInput = passwordView.querySelector('#password-input'); // Scoped to password view
+      const togglePasswordBtn = document.getElementById('toggle-password');
+      const backFromEmailBtn = document.getElementById('back-from-email');
+      const backFromPasswordBtn = document.getElementById('back-from-password');
+
+      // Handle email submission
+      emailForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = emailInput.value.trim();
+        if (email && email.includes('@')) {
+          userEmailDisplay.textContent = email;
+          emailView.style.display = 'none';
+          passwordView.style.display = 'block';
+          passwordInput.focus(); // Focus on password field
+        } else {
+          alert('Vui lòng nhập địa chỉ email hợp lệ.');
+        }
+      });
+
+      // Handle final login submission
+      passwordForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = userEmailDisplay.textContent; // Get email from the display
+        const password = passwordInput.value;
+        
+        // The loginUser function will now handle showing the notification
+        // and redirecting on success. We just need to call it.
+        // We need to import the real loginUser function.
+        import('./js/auth.js').then(({ loginUser }) => {
+            loginUser(email, password, () => {
+                // This is the onConfirm callback for successful login
+                window.location.href = './index.html';
+            });
+        }).catch(err => {
+            console.error("Failed to load auth module", err);
+            showNotification({ type: 'error', title: 'Lỗi', message: 'Không thể thực hiện đăng nhập. Vui lòng tải lại trang.' });
+        });
+      });
+
+      // Handle Back buttons
+      backFromEmailBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        history.back();
+      });
+
+      backFromPasswordBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        // Switch view from password back to email
+        passwordView.style.display = 'none';
+        emailView.style.display = 'block';
+        emailInput.focus();
+      });
+
+      // Toggle password visibility
+      togglePasswordBtn.addEventListener('click', function() {
+        const isPassword = passwordInput.type === 'password';
+        passwordInput.type = isPassword ? 'text' : 'password';
+        this.classList.toggle('visible', isPassword);
+        this.setAttribute('aria-label', isPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu');
+      });
+    });
+  </script>
+</body>
+</html>

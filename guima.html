@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Xác nhận Email - 𝐓𝐕𝐏 𝐁𝐋𝐎𝐆𝐆𝐄𝐑</title>
+  <link href='./assets/img/logo.png' rel='icon' type='image/png' style="border-radius: 40px;">
+
+  <!-- Main Styles -->
+  <link rel="stylesheet" href="./css/index.min.css">
+  <link rel="stylesheet" href="./css/responsive.css?v=20261118-shared-assets">
+  <link rel="stylesheet" href="./css/tvp-footer.css">
+
+  <!-- Page-specific Styles (reusing login styles for consistency) -->
+  <link rel="stylesheet" href="./css/login.css?v=20261118-shared-assets">
+</head>
+<body id="top" class="login-page-body">
+  <div class="wrapper">
+    <!-- Header -->
+    <header data-fls-header class="header" data-fls-header-scroll>
+      <div class="header__background"></div>
+      <div class="header__wrapper">
+        <div class="header__container">
+          <div class="header__menu menu">
+            <div class="menu__left-side">
+              <a class="menu__btn btn" href="./index.html" aria-label="TVP Blogger">
+                <img class="menu__brand-logo" src="./assets/img/logo.png" alt="TVP Blogger">
+              </a>
+            </div>
+            <div class="menu__body-wrapper">
+              <nav class="menu__body" aria-label="Primary navigation">
+                <ul class="menu__list">
+                  <li class="menu__item"><a href="./index.html" class="menu__link">Home</a></li>
+                  <li class="menu__item"><a href="./shop.html" class="menu__link">Shop</a></li>
+                  <li class="menu__item"><a href="./Coming Up.html" class="menu__link">Coming Up</a></li>
+                  <li class="menu__item"><a href="./feedback.html" class="menu__link">Feedback</a></li>
+                </ul>
+              </nav>
+              <div class="menu__action">
+                <div class="menu__audio-icon"></div>
+                <button type="button" data-fls-menu class="menu__icon icon-menu" aria-label="Toggle menu"><span></span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="login-main">
+      <div class="login-container" style="text-align: center;">
+        <h1 class="login-title">Xác nhận email của bạn</h1>
+        <p class="login-subtitle" style="margin-bottom: 2rem;">Mã xác nhận đã được gửi đến <strong id="user-email-display">...</strong>. Vui lòng kiểm tra email để tiếp tục.</p>
+        
+        <form id="otp-form">
+          <div class="form-group">
+            <label for="otp-box-1">Mã xác nhận</label>
+            <div class="otp-input-container">
+              <input type="text" id="otp-box-1" class="otp-box" maxlength="1" required>
+              <input type="text" id="otp-box-2" class="otp-box" maxlength="1" required>
+              <input type="text" id="otp-box-3" class="otp-box" maxlength="1" required>
+              <input type="text" id="otp-box-4" class="otp-box" maxlength="1" required>
+              <input type="text" id="otp-box-5" class="otp-box" maxlength="1" required>
+              <input type="text" id="otp-box-6" class="otp-box" maxlength="1" required>
+            </div>
+          </div>
+          <button type="submit" id="confirm-otp-btn" class="login-submit-btn" style="margin-top: 2rem;">Xác nhận</button>
+        </form>
+
+        <div class="resend-container">
+          Chưa nhận được mã? <button type="button" id="resend-otp-btn" class="resend-btn" disabled>Gửi lại (<span id="resend-timer">60</span>s)</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="tvp-site-footer">
+      <div class="tvp-footer__content">
+        <p class="tvp-footer__copyright">©️ 2026 TVP-BLOGGER. All rights reserved</p>
+        <p class="tvp-footer__details"><span>Ho Chi Minh City, Viet Nam</span><span>Hotline: (+84) 912 665 729</span></p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="./js/guima.js"></script>
+</body>
+</html>

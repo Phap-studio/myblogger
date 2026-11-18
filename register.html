@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Đăng ký - 𝐓𝐕𝐏 𝐁𝐋𝐎𝐆𝐆𝐄𝐑</title>
+  <link href='./assets/img/logo.png' rel='icon' type='image/png' style="border-radius: 40px;">
+
+  <!-- Main Styles -->
+  <link rel="stylesheet" href="./css/index.min.css">
+  <link rel="stylesheet" href="./css/responsive.css?v=20261118-shared-assets">
+  <link rel="stylesheet" href="./css/tvp-footer.css">
+
+  <!-- Page-specific Styles (reusing login styles for consistency) -->
+  <link rel="stylesheet" href="./css/login.css?v=20261118-shared-assets">
+  <link rel="stylesheet" href="./css/notification.css">
+</head>
+<body id="top" class="login-page-body">
+  <div class="wrapper">
+    <!-- Header -->
+    <header data-fls-header class="header" data-fls-header-scroll>
+      <div class="header__background"></div>
+      <div class="header__wrapper">
+        <div class="header__container">
+          <div class="header__menu menu">
+            <div class="menu__left-side">
+              <a class="menu__btn btn" href="./index.html" aria-label="TVP Blogger">
+                <img class="menu__brand-logo" src="./assets/img/logo.png" alt="TVP Blogger">
+              </a>
+            </div>
+            <div class="menu__body-wrapper">
+              <nav class="menu__body" aria-label="Primary navigation">
+                <ul class="menu__list">
+                  <li class="menu__item"><a href="./index.html" class="menu__link">Home</a></li>
+                  <li class="menu__item"><a href="./shop.html" class="menu__link">Shop</a></li>
+                  <li class="menu__item"><a href="./Coming Up.html" class="menu__link">Coming Up</a></li>
+                  <li class="menu__item"><a href="./feedback.html" class="menu__link">Feedback</a></li>
+                </ul>
+              </nav>
+              <div class="menu__action">
+                <div class="menu__audio-icon"></div>
+                <button type="button" data-fls-menu class="menu__icon icon-menu" aria-label="Toggle menu"><span></span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="login-main">
+      <div class="login-container">
+        <!-- Email Input View -->
+        <div id="email-view">
+          <h1 class="login-title">Đăng ký tài khoản</h1>
+          <form class="login-form" id="email-form" action="#">
+            <div class="form-group">
+              <label for="email-input">Email</label>
+              <input type="email" id="email-input" class="form-input" placeholder="Nhập email của bạn" required>
+            </div>
+            <button type="submit" class="login-submit-btn">Tiếp tục</button>
+          </form>
+          <div class="back-link-container">
+            <a href="#" id="back-from-email" class="back-link">← Quay lại trang trước</a>
+          </div>
+        </div>
+
+        <!-- Step 2: Detailed Registration View (Initially Hidden) -->
+        <div id="register-detail-view" style="display: none;">
+          <h1 class="login-title">Chào mừng bạn đến với TVP BLOGGER</h1>
+          <p class="login-subtitle">Mã xác thực đã được gửi đến <strong id="user-email-display"></strong>. Vui lòng xác nhận email để tiếp tục đăng ký.</p>
+          <form class="login-form" id="register-detail-form" action="#">
+            <!-- Verification Code -->
+            <div class="form-group">
+              <label for="verify-code-input">Mã xác thực</label>
+              <div class="input-with-actions">
+                <input type="text" id="verify-code-input" class="form-input" placeholder="Vui lòng nhập 6 chữ số mã xác minh" maxlength="6" required>
+                <span id="resend-timer" class="input-timer">01:00</span>
+              </div>
+              <div class="form-inline-buttons">
+                <button type="button" id="resend-code-btn" class="form-inline-btn" disabled>Gửi lại</button>
+                <button type="button" id="verify-code-btn" class="form-inline-btn primary">Xác thực</button>
+              </div>
+            </div>
+            <!-- Password -->
+            <div class="form-group">
+              <label for="password-input">Mật khẩu</label>
+              <div class="password-wrapper">
+                <input type="password" id="password-input" class="form-input" placeholder="Vui lòng nhập mật khẩu của bạn" required>
+                <button type="button" id="toggle-password" class="toggle-password" aria-label="Hiện mật khẩu"></button>
+              </div>
+            </div>
+            <!-- Confirm Password -->
+            <div class="form-group">
+              <label for="confirm-password-input">Xác nhận mật khẩu</label>
+              <div class="password-wrapper">
+                <input type="password" id="confirm-password-input" class="form-input" placeholder="Vui lòng nhập lại mật khẩu" required>
+                <button type="button" id="toggle-confirm-password" class="toggle-password" aria-label="Hiện mật khẩu"></button>
+              </div>
+            </div>
+            <!-- Nickname, Name, Phone, etc. -->          
+            <div class="form-group"><label for="phone-input">Số điện thoại </label><div class="phone-input-wrapper"><span class="phone-prefix">+84</span><input type="tel" id="phone-input" class="form-input" placeholder="Vui lòng nhập không có dấu gạch ngang" required></div></div>
+            <div class="form-group"><label for="dob-input">Ngày sinh</label><input type="text" id="dob-input" class="form-input" placeholder="YYYY-MM-DD" onfocus="(this.type='date')" onblur="(this.type='text')" required></div>
+            <div class="form-group"><label for="gender-select">Giới tính</label><select id="gender-select" class="form-input" required><option value="" disabled selected>Vui lòng chọn giới tính</option><option value="male">Nam</option><option value="female">Nữ</option><option value="other">Khác</option></select></div>
+            <!-- Agreement -->
+            <div class="form-options" style="margin-top: 1rem;">
+              <label class="checkbox-label"><input type="checkbox" id="agree-all"> Đồng ý tất cả</label>
+            </div>
+            <!-- Submit Button -->
+            <button type="submit" class="login-submit-btn">Hoàn tất đăng ký</button>
+            <div class="back-link-container">
+              <a href="#" id="back-from-details" class="back-link">← Quay lại để thay đổi email</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="tvp-site-footer">
+      <div class="tvp-footer__content">
+        <p class="tvp-footer__copyright">©️ 2026 TVP-BLOGGER. All rights reserved</p>
+        <p class="tvp-footer__copyright">©️2026 TVP BLOGGER, LTD ALL RIGHTS RESERVED.UNAUTHORIZED COMMERCIAL USE OR PUBLICATION</p>
+        <div class="tvp-footer__details">
+          <span>Ho Chi Minh City, Viet Nam</span><span>Hotline: (+84) 912 665 729</span><span>Email: vuongphap0990@gmail.com</span><span>24/7 online days</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <div id="verification-success-modal" class="verification-success-modal" role="dialog" aria-modal="true" aria-labelledby="verification-success-title" aria-hidden="true">
+    <div class="verification-success-modal__card">
+      <div class="verification-success-modal__icon" aria-hidden="true">✓</div>
+      <h2 id="verification-success-title">Xác thực thành công</h2>
+      <p>Email của bạn đã được xác nhận. Bạn có thể tiếp tục hoàn tất thông tin đăng ký.</p>
+      <button type="button" id="verification-success-close" class="verification-success-modal__button">Tiếp tục</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="module">
+    import { showNotification } from './js/notification.js';
+    import { setupOtpModule } from './js/guima.js';
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const emailView = document.getElementById('email-view');
+      const detailView = document.getElementById('register-detail-view');
+      const emailForm = document.getElementById('email-form');
+      const emailInput = document.getElementById('email-input');
+      const userEmailDisplay = document.getElementById('user-email-display');
+      const backFromEmailBtn = document.getElementById('back-from-email');
+      const verifyCodeBtn = document.getElementById('verify-code-btn');
+      const backFromDetailsBtn = document.getElementById('back-from-details');
+
+      // --- EmailJS Configuration ---
+      // BẠN CẦN THAY THẾ CÁC GIÁ TRỊ NÀY
+      const EMAILJS_SERVICE_ID = 'service_a8zym1c'; // <-- THAY THẾ ID DỊCH VỤ CỦA BẠN VÀO ĐÂY
+      const EMAILJS_TEMPLATE_ID = 'template_bmvdk7q'; // <-- THAY THẾ BẰNG TEMPLATE ID BẠN VỪA TẠO
+      const EMAILJS_PUBLIC_KEY = 'jJdb-zEIN9rQr63mU';
+
+      emailjs.init(EMAILJS_PUBLIC_KEY);
+
+      /**
+       * Sends the verification email using EmailJS.
+       * @param {string} email - The recipient's email.
+       * @param {string} otp - The one-time password.
+       * @returns {Promise}
+       */
+      function sendVerificationEmail(email, otp) {
+        const templateParams = {
+          email: email,
+          passcode: otp,
+        };
+        
+        // Disable button to prevent multiple sends
+        const submitBtn = emailForm.querySelector('.login-submit-btn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Đang gửi...';
+
+        return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+          .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Tiếp tục';
+          });
+      }
+
+      // --- Step 1: Handle Email Submission ---
+      emailForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = emailInput.value.trim();
+        if (!email || !email.includes('@')) {
+            alert('Vui lòng nhập một địa chỉ email hợp lệ.');
+            return;
+        }
+
+        // Check if user already exists BEFORE sending OTP
+        import('./js/auth.js').then(({ checkUserExists }) => {
+            if (checkUserExists(email)) {
+                showNotification({ type: 'error', title: 'Lỗi', message: 'Email này đã được đăng ký. Vui lòng đăng nhập.' });
+                return;
+            }
+
+            // If user does not exist, proceed to send OTP
+            userEmailDisplay.textContent = email;
+            emailView.style.display = 'none';
+            detailView.style.display = 'block';
+
+            const otp = Math.floor(100000 + Math.random() * 900000).toString();
+            const otpData = { code: otp, expires: Date.now() + 2 * 60 * 1000 };
+            sessionStorage.setItem('registration_otp', JSON.stringify(otpData));
+
+            sendVerificationEmail(email, otp).then(() => {
+                if (typeof setupOtpModule === 'function') {
+                    setupOtpModule();
+                }
+            }).catch(err => {
+                alert('Không thể gửi mã xác thực. Vui lòng thử lại. Lỗi: ' + JSON.stringify(err));
+                // Revert view if email fails to send
+                detailView.style.display = 'none';
+                emailView.style.display = 'block';
+            });
+        });
+      });
+
+      // --- Handle Back Buttons ---
+      backFromEmailBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        history.back();
+      });
+
+      backFromDetailsBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        detailView.style.display = 'none';
+        emailView.style.display = 'block';
+        emailInput.focus();
+      });
+
+      // --- Step 2: Handle Detailed Form ---
+      const passwordInput = document.getElementById('password-input');
+      const togglePasswordBtn = document.getElementById('toggle-password');
+      const confirmPasswordInput = document.getElementById('confirm-password-input');
+      const toggleConfirmPasswordBtn = document.getElementById('toggle-confirm-password');
+      const detailForm = document.getElementById('register-detail-form');
+
+      function togglePasswordVisibility(input, button) {
+        const isPassword = input.type === 'password';
+        input.type = isPassword ? 'text' : 'password';
+        button.classList.toggle('visible', isPassword);
+        button.setAttribute('aria-label', isPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu');
+      }
+
+      if (togglePasswordBtn) {
+        togglePasswordBtn.addEventListener('click', () => {
+          togglePasswordVisibility(passwordInput, togglePasswordBtn);
+        });
+      }
+
+      if (toggleConfirmPasswordBtn) {
+        toggleConfirmPasswordBtn.addEventListener('click', () => {
+          togglePasswordVisibility(confirmPasswordInput, toggleConfirmPasswordBtn);
+        });
+      }
+
+      if (detailForm) {
+        detailForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          // Crucial check: Ensure OTP was verified by checking if the button is disabled
+          if (!verifyCodeBtn.disabled) {
+            alert('Vui lòng xác thực email của bạn trước khi hoàn tất đăng ký.');
+            return;
+          }
+
+          const email = userEmailDisplay.textContent;
+          const password = passwordInput.value;
+          const confirmPassword = confirmPasswordInput.value;
+
+          // Basic validation
+          if (password !== confirmPassword) {
+            alert('Mật khẩu và xác nhận mật khẩu không khớp.');
+            return;
+          }
+          if (password.length < 6) {
+            alert('Mật khẩu phải có ít nhất 6 ký tự.');
+            return;
+          }
+
+          // Import the real registerUser function
+          import('./js/auth.js').then(({ registerUser }) => {
+            registerUser(email, password, () => {
+              // This is the onConfirm callback for successful registration
+              window.location.href = './login.html';
+            });
+          }).catch(err => {
+            console.error("Failed to load auth module", err);
+            showNotification({ type: 'error', title: 'Lỗi', message: 'Không thể thực hiện đăng ký. Vui lòng tải lại trang.' });
+          });
+        }
+      )};
+    });
+  </script>
+</body>
+</html>

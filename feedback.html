@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback - 𝐓𝐕𝐏 𝐁𝐋𝐎𝐆𝐆𝐄𝐑</title>
+  <link href='./assets/img/logo.png' rel='icon' type='image/png' style="border-radius: 40px;">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Main Styles -->
+  <link rel="stylesheet" href="./css/responsive.css?v=20261118-shared-assets">
+  <link rel="stylesheet" href="./css/tvp-footer.css">
+  
+  <!-- Page-specific Styles -->
+  <link rel="stylesheet" href="./css/floating-actions.css">
+  <link rel="stylesheet" href="./css/notifications-panel.css">
+  <link rel="stylesheet" href="./css/profile.css">
+  <link rel="stylesheet" href="./css/notification.css"> <!-- Giữ lại file này cho các popup thông báo chung -->
+  <link rel="stylesheet" href="./css/index.min.css">
+  <link rel="stylesheet" href="./css/feedback.css?v=20261118-shared-assets">
+   <link rel="stylesheet" href="./css/mobile-bottom-nav.css">
+
+  <!-- FIX: bỏ dải đen dưới footer (đặt SAU feedback.css để ghi đè) -->
+  <style>
+    html, body.feedback-page-body {
+      margin: 0;
+      padding-bottom: 0;
+      min-height: 100%;
+    }
+    body.feedback-page-body .wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    body.feedback-page-body .feedback-main {
+      flex: 1 0 auto;            /* đẩy footer xuống sát đáy */
+    }
+    body.feedback-page-body .tvp-site-footer {
+      margin-top: auto;
+      margin-bottom: 0;
+      flex-shrink: 0;
+    }
+  </style>
+  
+</head>
+<body id="top" class="feedback-page-body">
+  <div class="wrapper">
+    <!-- Header -->
+    <header data-fls-header class="header" data-fls-header-scroll>
+      <div class="header__background"></div>
+      <div class="header__wrapper">
+        <div class="header__container">
+          <div class="header__menu menu">
+            <div class="menu__left-side">
+              <a class="menu__btn btn" href="./index.html" aria-label="TVP Blogger">
+                <img class="menu__brand-logo" src="./assets/img/logo.png" alt="TVP Blogger">
+              </a>
+            </div>
+            <div class="menu__body-wrapper">
+              <nav class="menu__body" aria-label="Primary navigation">
+                <ul class="menu__list">
+                  <li class="menu__item"><a href="./index.html" class="menu__link">Home</a></li>
+                  <li class="menu__item"><a href="./shop.html" class="menu__link">Shop</a></li>
+                  <li class="menu__item"><a href="./Coming Up.html" class="menu__link">Coming Up</a></li>
+                  <li class="menu__item"><a href="./feedback.html" class="menu__link" aria-current="page">Feedback</a></li>
+                </ul>
+              </nav>
+              <div class="menu__action">
+                <div class="menu__audio-icon"></div>
+                <button type="button" data-fls-menu class="menu__icon icon-menu" aria-label="Toggle menu"><span></span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="feedback-main">
+      <div class="feedback-container-large">
+        <!-- Hero Section -->
+        <section class="feedback-hero" aria-labelledby="feedback-title" role="img" aria-label="An animation drawing the letters TVP">
+          <!-- TVP SVG Drawing Animation -->
+          <svg class="feedback-hero__bg-svg" viewBox="0 0 400 100" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <linearGradient id="line-gradient" x1="0%" y1="50%" x2="100%" y2="50%">
+                <stop offset="0%" stop-color="rgba(100, 100, 100, 0.2)" />
+                <stop offset="50%" stop-color="rgba(160, 160, 160, 0.7)" />
+                <stop offset="100%" stop-color="rgba(100, 100, 100, 0.2)" />
+              </linearGradient>
+            </defs>
+            <path class="tvp-logo-path" d="M50 20 H110 M80 20 V80" stroke="url(#line-gradient)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+            <path class="tvp-logo-path" d="M140 20 L170 80 L200 20" stroke="url(#line-gradient)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+            <path class="tvp-logo-path" d="M230 20 V80 M230 20 C280 20, 280 50, 230 50" stroke="url(#line-gradient)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <h1 id="feedback-title" class="feedback-hero-title">FEEDBACK</h1>
+          <p class="feedback-hero__subtitle">SHARE YOUR THOUGHTS</p>
+        </section>
+
+        <!-- Review Trigger -->
+        <div class="review-trigger-wrapper" id="review-trigger" tabindex="0" role="button" aria-label="Write a review">
+          <svg class="review-trigger__border" viewBox="0 0 760 68" preserveAspectRatio="none"><rect class="review-trigger__border-rect" x="0.5" y="0.5" width="calc(100% - 1px)" height="calc(100% - 1px)" rx="18" /></svg>
+          <span class="review-trigger-placeholder">Hãy viết đánh giá của bạn vào đây!</span>
+        </div>
+
+        <!-- Thank You Message (Initially Hidden) -->
+        <div class="thank-you-message" id="thank-you-message" style="display: none;" role="status">
+          <svg class="review-trigger__border" preserveAspectRatio="none">
+            <rect class="review-trigger__border-rect" x="0" y="0" width="100%" height="100%" rx="18" />
+          </svg>
+          <p class="thank-you-title"> Cảm ơn bạn đã đóng góp ý kiến!</p>
+          <p class="thank-you-subtitle">Mỗi đánh giá của bạn là một động lực giúp TVP BLOGGER ngày càng hoàn thiện hơn.</p>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Authentication Modal (Redesigned) -->
+    <div id="auth-modal-overlay" class="auth-modal-overlay">
+      <div class="auth-modal-content">
+        <button id="auth-modal-close" class="modal-close-btn">&times;</button>
+
+        <!-- Simplified View for Login/Register Redirect -->
+        <div class="auth-view" id="auth-view-initial">
+          <h3>Vui lòng đăng nhập/đăng ký để viết đánh giá.</h3>
+          <p>Cảm nhận của bạn luôn được lắng nghe. Đăng nhập để chia sẻ.</p>
+          <div class="auth-view-actions">
+            <button class="auth-button" id="auth-modal-login-btn">Đăng nhập</button>
+            <button class="auth-button auth-button-secondary" id="auth-modal-register-btn">Đăng ký</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div id="review-modal-overlay" class="modal-overlay">
+      <div class="modal-content review-modal-content">
+        <button id="review-modal-close" class="modal-close-btn">&times;</button>
+        <h3>Viết đánh giá của bạn</h3>
+        <div class="star-rating-interactive" id="star-rating-container">
+          <button class="star" data-value="1" aria-label="1 star rating"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
+          <button class="star" data-value="2" aria-label="2 star rating"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
+          <button class="star" data-value="3" aria-label="3 star rating"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
+          <button class="star" data-value="4" aria-label="4 star rating"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
+          <button class="star" data-value="5" aria-label="5 star rating"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></button>
+        </div>
+        <div class="feedback-textarea-wrapper">
+          <textarea id="feedback-textarea" rows="5" maxlength="1000" placeholder="Chia sẻ cảm nhận của bạn về chúng tôi..."></textarea>
+          <span class="char-counter" id="char-counter">0/1000</span>
+        </div>
+        <div class="submit-btn-wrapper">
+          <svg class="submit-btn__border" preserveAspectRatio="none"><rect class="submit-btn__border-rect" x="0" y="0" width="100%" height="100%" rx="8" /></svg>
+          <button id="submit-feedback-btn" class="modal-submit-btn">
+            <span class="btn-text">Gửi đánh giá</span>
+            <div class="btn-loader"></div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Validation Alert Modal -->
+    <div id="validation-alert-modal" class="modal-overlay">
+      <div class="modal-content validation-alert-content">
+        <h3 id="validation-alert-title">Chưa thể gửi đánh giá</h3>
+        <p id="validation-alert-message"></p>
+        <button id="validation-alert-close-btn" class="modal-submit-btn">Đã hiểu</button>
+      </div>
+    </div>
+
+    <!-- Success Toast Notification -->
+    <div id="feedback-toast" class="feedback-toast">
+      <svg class="toast-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="toast-message">Đã gửi thành công.</span>
+    </div>
+
+  <!-- Footer is reused from the main layout -->
+  <footer class="tvp-site-footer">
+    <div class="tvp-footer__content">
+      <p class="tvp-footer__copyright">©️ 2026 TVP-BLOGGER. All rights reserved</p>
+      <p class="tvp-footer__copyright">©️2026 TVP BLOGGER, LTD ALL RIGHTS RESERVED.UNAUTHORIZED COMMERCIAL USE OR PUBLICATION</p>
+      <div class="tvp-footer__details">
+        <span>Ho Chi Minh City, Viet Nam</span><span>Hotline: (+84) 912 665 729</span><span>Email: vuongphap0990@gmail.com</span><span>24/7 online days</span>
+      </div>
+    </div>
+    <ul class="social-links" aria-label="Social media">
+      <li><a href="https://github.com/Phap-studio" class="social-links__button" data-social="Github" target="_blank" rel="noopener noreferrer" aria-label="Github"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.835 2.809 1.305 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.602.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a></li>
+      <li><a href="https://www.facebook.com/vphapaccount" class="social-links__button" data-social="Facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.6 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5H17V3.9c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4V10H8.2v3h2.6v8h2.8Z"/></svg></a></li>
+      <li><a href="https://www.instagram.com/_tranvuongphap_/" class="social-links__button" data-social="Instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.7" r="1" class="social-links__dot"/></svg></a></li>
+    </ul>
+  </footer>
+  </div>
+
+  <!-- Floating Action Buttons -->
+  <div id="floating-actions-container" class="floating-actions">
+    <button id="fab-notification" class="fab-btn" aria-label="Thông báo">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/></svg>
+    </button>
+    <button id="fab-profile" class="fab-btn" aria-label="Tài khoản">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+    </button>
+  </div>
+
+  <!-- Profile Choice Modal (Independent) -->
+  <div id="profile-choice-modal" class="notification-modal-overlay">
+    <div class="notification-modal-content">
+      <button id="profile-modal-close-btn" class="notification-modal-close" aria-label="Đóng">&times;</button>
+      <h3>Tài khoản</h3>
+      <p>Vui lòng đăng ký hoặc đăng nhập để tiếp tục.</p>
+      <div class="notification-modal-actions">
+        <button id="profile-modal-register-btn" class="notification-modal-button secondary">Đăng ký</button>
+        <button id="profile-modal-login-btn" class="notification-modal-button primary">Đăng nhập</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notifications Panel (Reused from Home) -->
+  <div id="notifications-panel" class="notifications-panel">
+    <div class="notifications-header">
+      <h3>Thông báo</h3>
+    </div>
+    <div class="notifications-tabs">
+      <button class="notifications-tab active" data-tab="all">Tất cả</button>
+    </div>
+    <div class="notifications-body">
+      <div id="notifications-list"></div>
+    </div>
+  </div>
+
+  <!-- Profile Menu (Dropdown) (Reused from Home) -->
+  <div id="profile-menu" class="profile-menu">
+    <div class="profile-menu-header">
+      <div id="profile-menu-username" class="username">User Name</div>
+      <div id="profile-menu-email" class="email">user@example.com</div>
+    </div>
+    <ul class="profile-menu-list">
+      <li class="profile-menu-item"><button id="profile-menu-view">👤 Hồ sơ của tôi</button></li>
+      <li class="profile-menu-item"><button id="profile-menu-edit">✏️ Chỉnh sửa hồ sơ</button></li>
+      <li class="profile-menu-item logout"><button id="profile-menu-logout">🚪 Đăng xuất</button></li>
+    </ul>
+  </div>
+
+  <!-- Profile Modal (Reused from Home) -->
+  <div id="profile-modal-overlay" class="profile-modal-overlay">
+    <div class="profile-modal-content">
+      <div class="profile-modal-header">
+        <h3 id="profile-modal-title">Hồ sơ của tôi</h3>
+        <button id="profile-modal-close" class="notification-modal-close">&times;</button>
+      </div>
+      <div class="profile-modal-body">
+        <!-- View Profile -->
+        <div id="profile-view-container">
+          <div class="form-group profile-avatar-editor">
+            <img src="./files/avatar-placeholder.png" alt="Avatar" id="profile-view-avatar" class="profile-avatar-preview">
+          </div>
+          <div class="form-group profile-info-item">
+            <label>Tên hiển thị</label>
+            <div id="profile-view-name" class="value"></div>
+          </div>
+          <div class="form-group profile-info-item">
+            <label>Username</label>
+            <div id="profile-view-username" class="value"></div>
+          </div>
+          <div class="form-group profile-info-item">
+            <label>Email</label>
+            <div id="profile-view-email" class="value"></div>
+          </div>
+          <div class="form-group profile-info-item">
+            <label>Ngày tham gia</label>
+            <div id="profile-view-joined" class="value"></div>
+          </div>
+        </div>
+        <!-- Edit Profile -->
+        <div id="profile-edit-container" style="display: none;">
+          <form id="profile-edit-form">
+            <div class="form-group profile-avatar-editor">
+              <img src="./files/avatar-placeholder.png" alt="Avatar" id="profile-edit-avatar-preview" class="profile-avatar-preview">
+              <div>
+                <label for="profile-avatar-input" class="profile-avatar-upload-label">Thay đổi Avatar</label>
+                <input type="file" id="profile-avatar-input" accept="image/*">
+              </div>
+            </div>
+            <div class="form-group"><label for="profile-name-input">Tên hiển thị</label><input type="text" id="profile-name-input" class="form-input" required></div>
+            <div class="form-group"><label for="profile-username-input">Username</label><input type="text" id="profile-username-input" class="form-input" required></div>
+            <div class="profile-modal-actions"><button type="submit" class="notification-modal-button primary">Lưu thay đổi</button></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page-specific & Floating Actions Logic -->
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="module" src="./js/auth.js" defer></script>
+  <script type="module" src="./js/feedback.js" defer></script>
+  <script type="module" src="./js/floating-actions.js" defer></script>
+  <script type="module" src="./js/notifications.js" defer></script>
+  <script type="module" src="./js/profile.js" defer></script>
+<nav id="fb-mobile-menu" aria-label="Menu">
+  <a href="./index.html">HOME</a>
+  <a href="./shop.html">SHOP</a>
+  <a href="./Coming Up.html">COMING UP</a>
+  <a href="./feedback.html">FEEDBACK</a>
+</nav>
+
+<nav class="mobile-bottom-nav" aria-label="Điều hướng chính">
+  <a class="mobile-bottom-nav__item" href="./index.html" data-page="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg><span>Home</span></a>
+  <a class="mobile-bottom-nav__item" href="./shop.html" data-page="shop.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16l1 13H3L4 8Zm4 0a4 4 0 0 1 8 0"/></svg><span>Shop</span></a>
+  <a class="mobile-bottom-nav__item" href="./Coming Up.html" data-page="Coming Up.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 9h18m-11 3 5 3-5 3z"/></svg><span>Coming</span></a>
+  <a class="mobile-bottom-nav__item" href="./feedback.html" data-page="feedback.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v13H9l-5 4z"/><path d="M8 9h8M8 13h5"/></svg><span>Feedback</span></a>
+</nav>
+
+<script>
+  document.addEventListener('click', function (e) {
+    var menu = document.getElementById('fb-mobile-menu');
+    if (e.target.closest('[data-fls-menu], .menu__icon')) {
+      menu.classList.toggle('open');
+    } else if (!e.target.closest('#fb-mobile-menu')) {
+      menu.classList.remove('open');
+    }
+  }, true);
+</script>
+<script src="./js/mobile-bottom-nav.js" defer></script>
+
+</body>
+</html>

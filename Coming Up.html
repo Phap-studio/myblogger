@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coming Up - 𝐓𝐕𝐏 𝐁𝐋𝐎𝐆𝐆𝐄𝐑</title>
+<link href='./assets/img/logo.png' rel='icon' type='image/png' style="border-radius: 40px;">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap">
+  <link rel="stylesheet" href="./css/index.min.css">
+  <link rel="stylesheet" href="./css/responsive.css?v=20261118-shared-assets">
+  <link rel="stylesheet" href="./css/tvp-footer.css">
+  <link rel="stylesheet" href="./css/mobile-bottom-nav.css">
+  <style>
+    .content-hero {
+      /* Keep original spacing and layout properties */
+      min-height: clamp(34rem, 72vh, 42rem);
+      padding: 0 1.5rem 4rem;
+      text-align: center;
+      color: #fff;
+ 
+      /* --- NEW --- */
+      position: relative;
+      isolation: isolate; /* Create a new stacking context */
+      overflow: hidden; /* Contain the animated background */
+    }
+
+    /* The navbar is fixed, so keep the complete heading block well below it. */
+    .content-hero__copy {
+      margin-top: clamp(10.5rem, 22vh, 15rem);
+      animation: coming-up-reveal 700ms cubic-bezier(.22, .61, .36, 1) both;
+    }
+
+    .content-hero__copy h1 {
+      animation: coming-up-glow 3.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes coming-up-reveal {
+      from {
+        opacity: 0;
+        transform: translateY(1.5rem);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes coming-up-glow {
+      from { text-shadow: 0 0 0 rgba(132, 228, 222, 0); }
+      to { text-shadow: 0 0 1.5rem rgba(132, 228, 222, 0.2); }
+    }
+ 
+    .content-hero__background {
+      position: absolute;
+      /* Make it slightly larger to avoid seeing edges when scaling */
+      inset: -5%; 
+      background-image: url('./files/optimized/coming-background.jpg');
+      background-size: cover;
+      background-position: center;
+      z-index: -4; /* Push to the very back */
+      will-change: transform;
+      /* 2. Ken Burns effect */
+      animation: ken-burns 35s infinite alternate ease-in-out;
+    }
+
+    /* NEW: Moving gradient overlay */
+    .content-hero__background::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      /* 3. Subtle gradient overlay */
+      background-image: linear-gradient(90deg, hsla(0,0%,100%,0), hsla(0,0%,100%,0.08), hsla(0,0%,100%,0));
+      will-change: transform;
+      animation: move-overlay 40s infinite alternate ease-in-out;
+      z-index: 2; /* Above image, below glow */
+    }
+ 
+    /* MODIFIED: Light glow effect */
+    .content-hero__background::after {
+      content: '';
+      position: absolute;
+      inset: -50%; /* Make it large */
+      /* 4. Large light glow at top right */
+      background: radial-gradient(ellipse 60% 60% at 90% 10%, hsla(0,0%,100%,1) 0%, transparent 80%);
+      will-change: opacity;
+      animation: light-glow 12s infinite alternate ease-in-out;
+      z-index: 1; /* Above image */
+    }
+ 
+    .content-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-color: rgba(0,0,0,0.42);
+      z-index: -1; /* Above all background effects, below content */
+    }
+ 
+    @keyframes ken-burns {
+      to { transform: scale(1.03); }
+    }
+    @keyframes move-overlay {
+      from { transform: translateX(-15px); }
+      to { transform: translateX(15px); }
+    }
+    @keyframes light-glow {
+      from { opacity: 0.18; }
+      to { opacity: 0.28; }
+    }
+ 
+    /* Performance: Disable animations on mobile and for users who prefer reduced motion */
+    @media (max-width: 768px), (prefers-reduced-motion: reduce) {
+      .content-hero__background, .content-hero__background::before, .content-hero__background::after {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body id="top" class="content-page-body coming-up-page-body">
+  <div class="wrapper">
+    <header data-fls-header="" class="header" data-fls-header-scroll="">
+      <div class="header__background"></div>
+      <div class="header__wrapper">
+        <div class="header__container">
+          <div class="header__menu menu">
+            <div class="menu__body-wrapper">
+              <nav class="menu__body" aria-label="Primary navigation">
+                <ul class="menu__list">
+                  <li class="menu__item"><a href="./index.html" class="menu__link">HOME</a></li>
+                  <li class="menu__item"><a href="./shop.html" class="menu__link">SHOP</a></li>
+                  <li class="menu__item"><a href="./Coming Up.html" class="menu__link" aria-current="page">Coming Up</a></li>
+                  <li class="menu__item">
+                    <a href="./feedback.html" class="menu__link">FEEDBACK</a>
+                  </li>
+                </ul>
+              </nav>
+              <div class="menu__action">
+                <div class="menu__audio-icon"></div>
+                <button type="button" class="menu__icon icon-menu" aria-label="Toggle menu"><span></span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content-hero">
+      <div class="content-hero__background"></div>
+      <div class="content-hero__copy">
+        <p style="margin:0 0 1rem; opacity:.7; letter-spacing:.12em;">TVP BLOGGER</p>
+        <h1 style="margin:0; font-family:zentry, sans-serif; font-size:clamp(3rem,10vw,7rem);">Coming Up</h1>
+        <p style="max-width:34rem; margin:1.5rem auto 0; line-height:1.5;">New content will be available here soon.</p><br>
+         <p style="text-align: center; line-height:1.5;">Thanks</p>
+      </div>
+    </main>
+    
+    <footer class="tvp-site-footer">
+      	<div class="tvp-footer__content">
+				<p class="tvp-footer__copyright">©️ 2026 TVP-BLOGGER. All rights reserved</p>
+				<p class="tvp-footer__copyright">©️2026 TVP BLOGGER, LTD ALL RIGHTS RESERVED.UNAUTHORIZED COMMERCIAL USE OR PUBLICATION</p>
+				<p class="tvp-footer__details"><span>Ho Chi Minh City, Viet Nam</span><span>Hotline: (+84) 912 665 729</span><span>Email: vuongphap0990@gmail.com</span><span>24/7 online days</span></p>		
+			</div>
+      <ul class="social-links" aria-label="Social media">			
+				<li><a href="https://github.com/Phap-studio" class="social-links__button" data-social="Github" target="_blank" rel="noopener noreferrer" aria-label="Github"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.835 2.809 1.305 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.602.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg></a></li>		
+					<li><a href="https://www.facebook.com/vphapaccount" class="social-links__button" data-social="Facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.6 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5H17V3.9c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4V10H8.2v3h2.6v8h2.8Z"/></svg></a></li>
+					<li><a href="https://www.instagram.com/_tranvuongphap_/" class="social-links__button" data-social="Instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.7" r="1" class="social-links__dot"/></svg></a></li>
+				
+				</ul>
+    </footer>
+  </div>
+
+  <nav class="mobile-bottom-nav" aria-label="Điều hướng chính">
+    <a class="mobile-bottom-nav__item" href="./index.html" data-page="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg><span>Home</span></a>
+    <a class="mobile-bottom-nav__item" href="./shop.html" data-page="shop.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16l1 13H3L4 8Zm4 0a4 4 0 0 1 8 0"/></svg><span>Shop</span></a>
+    <a class="mobile-bottom-nav__item" href="./Coming Up.html" data-page="Coming Up.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 9h18m-11 3 5 3-5 3z"/></svg><span>Coming</span></a>
+    <a class="mobile-bottom-nav__item" href="./feedback.html" data-page="feedback.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v13H9l-5 4z"/><path d="M8 9h8M8 13h5"/></svg><span>Feedback</span></a>
+  </nav>
+  <nav id="fb-mobile-menu" aria-label="Menu">
+    <a href="./index.html">HOME</a>
+    <a href="./shop.html">SHOP</a>
+    <a href="./Coming Up.html">COMING UP</a>
+    <a href="./feedback.html">FEEDBACK</a>
+  </nav>
+  <script>
+    document.addEventListener('click', function (e) {
+      var menu = document.getElementById('fb-mobile-menu');
+      if (e.target.closest('[data-fls-menu], .menu__icon')) {
+        menu.classList.toggle('open');
+      } else if (!e.target.closest('#fb-mobile-menu')) {
+        menu.classList.remove('open');
+      }
+    });
+  </script>
+  <script src="./js/mobile-bottom-nav.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stay Tuned - 𝐓𝐕𝐏 𝐁𝐋𝐎𝐆𝐆𝐄𝐑</title>
+<link href='./assets/img/logo.png' rel='icon' type='image/png' style="border-radius: 40px;">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap">
+  <link rel="stylesheet" href="./css/index.min.css">
+  <link rel="stylesheet" href="./css/responsive.css?v=20261118-shared-assets">
+  <link rel="stylesheet" href="./css/tvp-footer.css">
+  <style>
+    .content-hero {
+      /* Keep original spacing and layout properties */
+      min-height: 100vh;
+      padding: 10rem 1.5rem 4rem;
+      text-align: center;
+      color: #fff;
+ 
+      /* --- NEW --- */
+      position: relative;
+      isolation: isolate; /* Create a new stacking context */
+      overflow: hidden; /* Contain the animated background */
+    }
+ 
+    .content-hero__background {
+      position: absolute;
+      /* Make it slightly larger to avoid seeing edges when scaling */
+      inset: -5%; 
+      background-image: url('./files/optimized/coming-background.jpg');
+      background-size: cover;
+      background-position: center;
+      z-index: -4; /* Push to the very back */
+      will-change: transform;
+      /* 2. Ken Burns effect */
+      animation: ken-burns 35s infinite alternate ease-in-out;
+    }
+
+    /* NEW: Moving gradient overlay */
+    .content-hero__background::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      /* 3. Subtle gradient overlay */
+      background-image: linear-gradient(90deg, hsla(0,0%,100%,0), hsla(0,0%,100%,0.08), hsla(0,0%,100%,0));
+      will-change: transform;
+      animation: move-overlay 40s infinite alternate ease-in-out;
+      z-index: 2; /* Above image, below glow */
+    }
+ 
+    /* MODIFIED: Light glow effect */
+    .content-hero__background::after {
+      content: '';
+      position: absolute;
+      inset: -50%; /* Make it large */
+      /* 4. Large light glow at top right */
+      background: radial-gradient(ellipse 60% 60% at 90% 10%, hsla(0,0%,100%,1) 0%, transparent 80%);
+      will-change: opacity;
+      animation: light-glow 12s infinite alternate ease-in-out;
+      z-index: 1; /* Above image */
+    }
+ 
+    .content-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-color: rgba(0,0,0,0.42);
+      z-index: -1; /* Above all background effects, below content */
+    }
+ 
+    @keyframes ken-burns {
+      to { transform: scale(1.03); }
+    }
+    @keyframes move-overlay {
+      from { transform: translateX(-15px); }
+      to { transform: translateX(15px); }
+    }
+    @keyframes light-glow {
+      from { opacity: 0.18; }
+      to { opacity: 0.28; }
+    }
+ 
+    /* Performance: Disable animations on mobile and for users who prefer reduced motion */
+    @media (max-width: 768px), (prefers-reduced-motion: reduce) {
+      .content-hero__background, .content-hero__background::before, .content-hero__background::after {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body id="top" class="content-page-body">
+  <div class="wrapper">
+    <header data-fls-header="" class="header" data-fls-header-scroll="">
+      <div class="header__background"></div>
+      <div class="header__wrapper">
+        <div class="header__container">
+          <div class="header__menu menu">
+            <div class="menu__left-side">
+              <a class="menu__btn btn" href="./index.html" aria-label="TVP Blogger">
+                <img class="menu__brand-logo" src="./assets/img/logo.png" alt="TVP Blogger">
+              </a>
+            </div>
+            <div class="menu__body-wrapper">
+              <nav class="menu__body" aria-label="Primary navigation">
+                <ul class="menu__list">
+                  <li class="menu__item"><a href="./index.html" class="menu__link">HOME</a></li>
+                  <li class="menu__item"><a href="./shop.html" class="menu__link">SHOP</a></li>
+                  <li class="menu__item"><a href="./Stay Tuned.html" class="menu__link" aria-current="page">Stay Tuned</a></li>
+                  <li class="menu__item">
+                    <a href="#" class="menu__link">FEEDBACK</a>
+                  </li>
+                </ul>
+              </nav>
+              <div class="menu__action">
+                <div class="menu__audio-icon"></div>
+                <button type="button" data-fls-menu="" class="menu__icon icon-menu" aria-label="Toggle menu"><span></span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content-hero">
+      <div class="content-hero__background"></div>
+      <p style="margin:0 0 1rem; opacity:.7; letter-spacing:.12em;">TVP BLOGGER</p>
+      <h1 style="margin:0; font-family:zentry, sans-serif; font-size:clamp(3rem,10vw,7rem);">Stay Tuned</h1>
+      <p style="max-width:34rem; margin:1.5rem auto 0; line-height:1.5;">New content will be available here soon.</p>
+    </main>
+    
+    <footer class="tvp-site-footer">
+      	<div class="tvp-footer__content">
+				<p class="tvp-footer__copyright">©️ 2026 TVP-BLOGGER. All rights reserved</p>
+				<p class="tvp-footer__copyright">©️2026 TVP BLOGGER, LTD ALL RIGHTS RESERVED.UNAUTHORIZED COMMERCIAL USE OR PUBLICATION</p>
+				<p class="tvp-footer__details"><span>Ho Chi Minh City, Viet Nam</span><span>Hotline: (+84) 912 665 729</span><span>Email: vuongphap0990@gmail.com</span><span>24/7 online days</span></p>		
+			</div>
+      <ul class="social-links" aria-label="Social media">			
+					<li><a href="https://www.tiktok.com/" class="social-links__button" data-social="TikTok" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 3c.3 2.2 1.6 3.8 3.9 4.1v3.1a7.1 7.1 0 0 1-3.8-1.1v6.3a5.4 5.4 0 1 1-4.7-5.3v3.1a2.4 2.4 0 1 0 1.6 2.3V3h3Z"/></svg></a></li>
+					<li><a href="https://www.facebook.com/" class="social-links__button" data-social="Facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.6 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5H17V3.9c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4V10H8.2v3h2.6v8h2.8Z"/></svg></a></li>
+					<li><a href="https://www.instagram.com/" class="social-links__button" data-social="Instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.7" r="1" class="social-links__dot"/></svg></a></li>
+				
+				</ul>
+    </footer>
+  </div>
+
+</body>
+</html>

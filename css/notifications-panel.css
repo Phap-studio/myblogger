@@ -1,0 +1,154 @@
+/* ==========================================================================
+   Notifications Panel Styles
+   ========================================================================== */
+
+.notifications-panel {
+  position: fixed;
+  top: 68px; /* Position below the profile button */
+  right: 1rem;
+  z-index: 1005;
+  width: 360px;
+  max-height: 480px;
+  display: flex;
+  flex-direction: column;
+  background-color: #242424;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px) scale(0.98);
+  transform-origin: top right;
+  /* Transition khi đóng panel */
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s 0.2s;
+  will-change: transform, opacity; /* Báo cho trình duyệt để tối ưu animation */
+}
+
+.notifications-panel.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  /* Transition khi mở panel (không có delay cho visibility) */
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s;
+}
+
+/* Header */
+.notifications-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.notifications-header h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+/* Tabs */
+.notifications-tabs {
+  display: flex;
+  padding: 0 1.25rem; /* Bỏ padding top/bottom và border */
+  flex-shrink: 0;
+}
+
+.notifications-tab {
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #a0a0a0;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.notifications-tab:hover {
+  color: #fff;
+}
+
+.notifications-tab.active {
+  color: #fff;
+  border-bottom-color: #007aff;
+}
+
+/* Body / List */
+.notifications-body {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+.notification-item {
+  display: flex;
+  gap: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.notification-item:hover {
+  background-color: #3a3a3a;
+}
+
+.notification-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background-color: rgba(0, 122, 255, 0.15);
+  border-radius: 50%;
+  color: #007aff;
+  font-size: 1rem;
+}
+
+.notification-content {
+  flex-grow: 1;
+}
+
+.notification-message {
+  font-size: 0.9rem;
+  color: #e0e0e0;
+  line-height: 1.5;
+  margin: 0 0 0.25rem 0;
+}
+
+.notification-timestamp {
+  font-size: 0.75rem;
+  color: #8a8a8a;
+}
+
+.notifications-empty-state {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 2rem;
+  text-align: center;
+  color: #8a8a8a;
+}
+
+.notifications-empty-state .empty-state-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.notifications-empty-state .empty-state-message {
+  font-size: 0.85rem;
+  color: #a0a0a0;
+}
+
+@media (max-width: 480px) {
+  .notifications-panel {
+    width: calc(100vw - 2rem);
+    max-height: 70vh;
+  }
+}

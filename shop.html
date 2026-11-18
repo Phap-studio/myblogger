@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Store - 𝐓𝐕𝐏 𝐁𝐋𝐎𝐆𝐆𝐄𝐑</title>
+ <link href='./assets/img/logo.png' rel='icon' type='image/png' style="border-radius: 40px;">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/index.min.css">
+  <link rel="stylesheet" href="./css/responsive.css?v=20261118-shared-assets">
+  <link rel="stylesheet" href="./css/tvp-footer.css">
+  <link rel="stylesheet" href="./css/floating-actions.css">
+  <link rel="stylesheet" href="./css/mobile-bottom-nav.css">
+  <link rel="preload" as="image" href="./files/shop-optimized/banner-main.jpg?v=20261118-fast-render" fetchpriority="high">
+  <style>
+    :root {
+      --page: #121212; --text: #f5f5f5; --muted: #a6a6a6; --accent: #f16e63;
+      /* Animation & Transition Variables */
+      --ease-out-cubic: cubic-bezier(.22,.61,.36,1);
+      --duration-fast: 220ms;
+      --duration-normal: 250ms;
+      --duration-slow: 300ms;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #121212; color: var(--text); font-family: 'Montserrat', sans-serif; }
+    a { color: inherit; text-decoration: none; }
+    .shop-page { width: min(100% - 32px, 1080px); margin: 0 auto; padding-bottom: 56px; }
+    .topbar { height: 51px; display: flex; align-items: center; gap: 34px; }
+    .brand img { display: block; width: 52px; height: 34px; object-fit: contain; }
+    .nav { display: flex; align-items: center; gap: 20px; font-size: 11px; font-weight: 700; color: #9c9c9c; text-transform: uppercase; }
+    .nav a:first-child { color: #e7e7e7; }
+    .top-actions { display: flex; align-items: center; gap: 21px; margin-left: auto; }
+    .bell { width: 16px; height: 16px; border: 1.5px solid #f5f5f5; border-radius: 9px 9px 5px 5px; position: relative; }
+    .bell::before { content: ""; position: absolute; width: 5px; height: 1.5px; background: #f5f5f5; bottom: -4px; left: 4px; border-radius: 2px; }
+    .profile { width: 23px; height: 23px; border-radius: 50%; background: var(--accent); position: relative; }
+    .profile::before, .profile::after { content: ""; position: absolute; border-radius: 50%; background: #ffc0b6; }
+    .profile::before { width: 8px; height: 8px; top: 4px; left: 7px; }
+    .profile::after { width: 13px; height: 7px; bottom: 3px; left: 5px; }
+    /* Banner starts below the fixed header. Change this path to use another banner image. */
+    .hero { min-height: 400px; margin-top: 76px; position: relative; overflow: hidden; background: #060606; isolation: isolate; z-index: 1; }
+    .hero-background-image {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: -2;
+    }
+    .hero-background-image::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(0,0,0,.7) 0%, rgba(0,0,0,.35) 47%, rgba(0,0,0,.08));
+      z-index: 1;
+    }
+    .hero-content { padding: 61px 35px; max-width: 355px; }
+    .eyebrow { margin: 0 0 11px; font-size: 12px; font-weight: 700; color: #b8b8b8; }
+    .eyebrow span { margin-left: 6px; font-size: 20px; vertical-align: -2px; }
+    .hero h1 { margin: 0; font-size: clamp(24px, 3vw, 32px); line-height: 1.14; letter-spacing: -.8px; }
+    .hero-title { position: absolute; right: 40px; top: 170px; text-align: center; color: #f1c389; font-weight: 800; font-size: clamp(28px, 5vw, 52px); line-height: .9; letter-spacing: -2px; animation: motion-blur-right 3s infinite alternate; }
+    .hero-title small { display: block; margin-top: 8px; font-size: 9px; letter-spacing: 5px; }
+    .slides { position: absolute; display: flex; gap: 8px; left: 35px; bottom: 5px; }
+    .slide { padding: 0; width: 74px; height: 43px; overflow: hidden; border-radius: 3px; border: 1px solid transparent; background: #333; cursor: pointer; opacity: .74; }
+    @keyframes motion-blur-right {
+      to {
+        opacity: 0.7;
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.4), 0 0 12px rgba(241, 195, 137, 0.4), 1px 0 1px rgba(241, 195, 137, 0.1), 2px 0 1px rgba(241, 195, 137, 0.1), 3px 0 1px rgba(241, 195, 137, 0.1), 4px 0 2px rgba(241, 195, 137, 0.25), 5px 0 3px rgba(241, 195, 137, 0.25), 6px 0 5px rgba(241, 195, 137, 0.35), 7px 0 8px rgba(241, 195, 137, 0.45);
+      }
+    }
+    .slide.active { border-color: white; opacity: 1; }
+    .slide img { width: 100%; height: 100%; object-fit: cover; }
+    .section-title { display: flex; align-items: center; justify-content: center; margin: 25px 24px 15px; font-size: 13px; font-weight: 800; text-transform: uppercase; color: #FFFFFF; }
+    .section-title a { color: #aeaeae; font-size: 10px; }
+    /* Grid layout for video cards */
+    .video-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; padding: 0 24px; }
+    .video-grid.loading {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    .video-card {
+      min-width: 0;
+    }
+    .video-card:hover {
+      transform: scale(1.02) translateZ(0);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    /* Để thay đổi CHIỀU CAO của thẻ, hãy sửa giá trị '1.5' (tỷ lệ rộng/cao) dưới đây. Số nhỏ hơn sẽ làm thẻ cao hơn. */
+    .video-image { aspect-ratio: 1.5; /* Tỷ lệ 3:2 */ position: relative; overflow: hidden; border-radius: 5px; background: #242424; display: grid; place-items: center; border: 1px solid transparent; }
+    .video-card:hover .video-image { border-color: rgba(255,255,255,0.1); }
+    .video-image img { width: 100%; height: 100%; object-fit: contain; opacity: 1; }
+    .video-image img.loaded { opacity: 1; }
+    .tag { position: absolute; right: 5px; bottom: 5px; padding: 2px 4px; border-radius: 2px; background: rgba(0,0,0,.82); font-size: 7px; font-weight: 700; }
+    .video-card h3 { overflow: hidden; margin: 8px 0 0; font-size: 10px; line-height: 1.35; white-space: nowrap; text-overflow: ellipsis; }
+    .video-card p { margin: 4px 0 0; color: var(--muted); font-size: 9px; }
+    @media (max-width: 620px) { .shop-page { width: 100%; } .topbar { padding: 0 16px; gap: 15px; } .nav { gap: 11px; font-size: 9px; } .hero { margin-top: 70px; } .hero-content { padding: 48px 24px; } .hero-title { right: 40px; top: 180px; } .slides { left: 24px; } .video-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 0 16px; } .section-title { margin-inline: 16px; } }
+    .slide-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: white;
+      cursor: pointer;
+      z-index: 5;
+      opacity: 0;
+      pointer-events: none;
+      transition: background-color .2s ease, opacity .3s ease;
+    }
+    .slide-nav:hover { background: rgba(0,0,0,0.6); }
+    .slide-nav.prev { left: 20px; }
+    .slide-nav.next { right: 20px; }
+    .slide-nav svg { width: 24px; height: 24px; fill: currentColor; }
+    .hero:hover .slide-nav {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Modal Styles */
+   .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none; /* Transition visibility after opacity fades out */
+      transition: opacity var(--duration-normal) ease, visibility 0s var(--duration-normal);
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .modal-content {
+      background: #1B1B1B; /* New background */
+      padding: 24px; /* Adjusted padding */
+      border-radius: 20px; /* New border-radius */
+      border: 1px solid rgba(255,255,255,0.08); /* New border */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 20px 60px rgba(0, 0, 0, 0.3); /* Large box-shadow */
+      position: relative;
+      width: min(90%, 950px); /* Adjusted width */
+      max-height: 90vh; /* Adjusted max-height */
+      overflow-y: auto;
+      transform: translate3d(0, 20px, 0) scale(0.98); /* Fade + Scale effect */
+      opacity: 0;
+      will-change: transform, opacity;
+      transition: transform var(--duration-slow) var(--ease-out-cubic), opacity var(--duration-slow) var(--ease-out-cubic);
+    }
+    .modal-overlay.active .modal-content {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 1;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: transparent;
+      border: none;
+      font-size: 2rem;
+      color: #B8B8B8; /* Muted color */
+      cursor: pointer;
+      line-height: 1;
+      padding: 0.5rem;
+      transition: color 0.2s ease, transform 0.2s ease;
+      z-index: 10; /* Ensure it's above content */
+    }
+    .modal-close:hover {
+      color: #FFFFFF; /* White on hover */
+      transform: scale(1.1);
+    }
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    /* New Modal Layout */
+    .modal-grid {
+      display: grid;
+      grid-template-columns: 40% 60%; /* 2 columns */
+      gap: 24px; /* Spacing between columns */
+      align-items: start; /* Align items to the start of the grid area */
+    }
+
+    .modal-left-col {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    .modal-product-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      object-position: center;
+      border-radius: 12px;
+      background-color: transparent;
+    }
+
+    .modal-right-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px; /* Default spacing for elements */
+    }
+
+    .modal-product-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700; /* Bold */
+      font-size: 36px;
+      color: #FFFFFF;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .modal-product-brand {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: #B8B8B8;
+      margin: 0;
+    }
+
+    .modal-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin: 16px 0;
+    }
+
+    .modal-info-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 2 columns for info cards */
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .modal-info-card {
+      background: #242424; /* Card background */
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: #B8B8B8;
+      font-size: 14px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .modal-features-list {
+      list-style: none;
+      /* Add padding to align with info cards */
+      padding: 0 0 0 20px;
+      margin: 0 0 24px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .modal-features-list li, .modal-features-list-item {
+      color: #B8B8B8;
+      font-size: 15px;
+      line-height: 1.5;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-features-list li::before {
+      content: '✔'; /* Checkmark icon */
+      color: #6D5DF6; /* Accent color for checkmark */
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    .modal-qr-section {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: #242424; /* Card background */
+      border-radius: 12px;
+      padding: 20px;
+      width: 100%;
+    }
+
+    /* New container for QR code and button */
+    .modal-qr-content {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 20px;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .modal-qr-left {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-qr-image {
+      width: 120px;
+      height: 120px;
+      border-radius: 8px;
+      object-fit: contain;
+      background-color: #fff; /* QR background */
+      padding: 5px;
+    }
+
+    .modal-qr-right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .modal-qr-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: #FFFFFF;
+      margin: 0;
+    }
+
+    .modal-qr-description {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      color: #B8B8B8;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .modal-zalo-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: 999px; /* Large border-radius */
+      background: linear-gradient(90deg, #6D5DF6, #8E44FF); /* Gradient */
+      color: #FFFFFF;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      text-decoration: none;
+      transition: background var(--duration-slow) ease, box-shadow var(--duration-slow) ease, transform var(--duration-slow) ease;
+      box-shadow: 0 4px 15px rgba(110, 80, 240, 0.4);
+    }
+
+    .modal-zalo-button:hover {
+      background: linear-gradient(90deg, #7E6DFF, #9F55FF); /* Brighter gradient on hover */
+      box-shadow: 0 6px 20px rgba(110, 80, 240, 0.6);
+      transform: translateY(-2px);
+    }
+
+    /* Responsive for mobile */
+    @media (max-width: 768px) {
+      .modal-content {
+        padding: 16px;
+        border-radius: 16px;
+        width: 95%;
+        max-height: 95vh;
+      }
+      .modal-grid {
+        grid-template-columns: 1fr; /* Single column */
+        gap: 20px;
+      }
+      .modal-product-title {
+        font-size: 28px;
+      }
+      .modal-info-cards {
+        grid-template-columns: 1fr; /* Single column for info cards */
+      }
+      /* Adjust QR section for mobile */
+      .modal-qr-section {
+        text-align: center;
+      }
+      .modal-qr-content {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 16px;
+      }
+      .modal-qr-right { justify-content: center; }
+      .modal-zalo-button {
+        width: 100%; /* Full width button */
+        max-width: 250px; /* Limit button width */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .modal-product-title {
+        font-size: 24px;
+      }
+      .modal-info-card {
+        font-size: 13px;
+        padding: 10px 12px;
+      }
+      .modal-features-list li {
+        font-size: 14px;
+      }
+      .modal-qr-image {
+        width: 100px;
+        height: 100px;
+      }
+      .modal-qr-title {
+        font-size: 16px;
+      }
+      .modal-qr-description {
+        font-size: 13px;
+      }
+      .modal-zalo-button {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+    }
+
+    /* Pagination Styles */
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin: 50px 0 60px;
+      flex-wrap: wrap;
+    }
+    .pagination-button {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, .08);
+      background: #1B1B1B;
+      color: #A5A5A5;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--duration-fast) ease;
+      will-change: transform, background-color, border-color;
+      transform: translateZ(0);
+    }
+    .pagination-button:hover:not(:disabled) {
+      background: #2A2A2A;
+      border-color: rgba(255, 255, 255, .15);
+      transform: scale(1.05) translateZ(0);
+    }
+    .pagination-button.active {
+      background: linear-gradient(90deg, #6D5DF6, #8E44FF);
+      color: #FFFFFF;
+      border-color: transparent;
+      box-shadow: 0 0 15px rgba(110, 80, 240, 0.5);
+      cursor: default;
+      pointer-events: none;
+    }
+    .pagination-button.ellipsis {
+      background: transparent;
+      border: none;
+      cursor: default;
+      pointer-events: none;
+      transform: none !important; /* Override hover transform */
+    }
+    .pagination-button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none !important; /* Override hover transform */
+      background: #1B1B1B !important; /* Ensure background doesn't change on hover */
+    }
+    @media (any-hover: hover) and (pointer: fine) {
+      .video-card {
+        transition: transform 150ms ease-out;
+        will-change: auto;
+      }
+      .video-image img {
+        transition-duration: 150ms;
+      }
+      .slide-nav {
+        transition: background-color 140ms ease-out, opacity 140ms ease-out;
+        will-change: auto;
+      }
+      .pagination-button {
+        transition: transform 140ms ease-out, background-color 140ms ease-out, border-color 140ms ease-out, color 140ms ease-out;
+        will-change: auto;
+      }
+    }
+  </style>
+
+
+</head>
+<body id="top" class="shop-page-body">
+  <main class="shop-page">
+    <header data-fls-header class="header" data-fls-header-scroll>
+      <div class="header__background"></div>
+      <div class="header__wrapper"><div class="header__container"><div class="header__menu menu">
+        <div class="menu__body-wrapper"><nav class="menu__body" aria-label="Primary navigation"><ul class="menu__list">
+          <li class="menu__item"><a href="./index.html" class="menu__link">Home</a></li>
+          <li class="menu__item"><a href="./shop.html" class="menu__link" aria-current="page">Shop</a></li>
+          <li class="menu__item"><a href="./Coming Up.html" class="menu__link">Coming Up</a></li>
+          <li class="menu__item"><a href="./feedback.html" class="menu__link">FEEDBACK</a></li>
+        </ul></nav><div class="menu__action"><div class="menu__audio-icon"></div><button type="button" class="menu__icon icon-menu" aria-label="Toggle menu"><span></span></button></div></div>
+      </div></div></div>
+      <!-- DI CHUYỂN CÁC NÚT VÀO ĐÂY ĐỂ CÓ BỐ CỤC TRÁI - GIỮA - PHẢI -->
+      <div id="floating-actions-container" class="floating-actions">
+        <button id="fab-notification" class="fab-btn" aria-label="Thông báo">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"></path></svg>
+        </button>
+        <button id="fab-profile" class="fab-btn" aria-label="Tài khoản">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>
+        </button>
+      </div>
+    </header>
+    <section class="hero" id="hero">
+      <div class="hero-background-image" id="hero-bg-1"></div>
+      <div class="hero-background-image" id="hero-bg-2"></div>
+      <button class="slide-nav prev" aria-label="Previous slide"><svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+      <button class="slide-nav next" aria-label="Next slide"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+      <div class="hero-content">
+        <h1 id="hero-heading"></h1>
+      </div>
+      <div class="hero-title">FIND WHAT<br> YOU NEED<small>NEW VERSION</small></div>
+      <div class="slides" aria-label="Chọn video nổi bật">
+        <!-- To change this slide, replace both ./files/banner.png paths with your next image file. -->
+        <button class="slide active" data-title="WELLCOME | TO MYBLOG" data-image="./files/shop-optimized/banner-main.jpg?v=20261118-fast-render"><img src="./files/shop-optimized/banner-main.jpg?v=20261118-fast-render" alt="Video 1" loading="eager" decoding="async" fetchpriority="high"></button>
+
+        <button class="slide" data-title="" data-image="./files/shop-optimized/banner-3.jpg?v=20261118-fast-render"><img src="./files/shop-optimized/banner-3.jpg?v=20261118-fast-render" alt="Video 2" loading="eager" decoding="async"></button>
+
+        <button class="slide" data-title="" data-image="./files/shop-optimized/banner-4.jpg?v=20261118-fast-render"><img src="./files/shop-optimized/banner-4.jpg?v=20261118-fast-render" alt="Video 3" loading="eager" decoding="async"></button>
+      </div>
+    </section>
+
+       
+<section aria-labelledby="featured-title-2">
+  <div class="section-title" >Premium Store</div>
+  <!-- Container để JavaScript render các sản phẩm vào -->
+  <div class="video-grid" id="product-grid-container">
+    <!-- Các thẻ sản phẩm sẽ được tự động tạo và chèn vào đây -->
+  </div>
+  <div id="pagination-container" class="pagination-container"></div>
+ </section>
+
+    <div id="detail-modal" class="modal-overlay">
+      <div class="modal-content">
+        <button type="button" class="modal-close" aria-label="Đóng cửa sổ">×</button>
+        <div class="modal-grid">
+          <div class="modal-left-col">
+            <img src="./files/placeholder.png" alt="Product Image" class="modal-product-image" id="modal-product-image">
+            <div class="modal-qr-section">
+              <h4 class="modal-qr-title">Liên hệ mua hàng</h4>
+              <p class="modal-qr-description">Quét mã QR hoặc nhấn nút bên dưới để được tư vấn nhanh.</p>
+              <div class="modal-qr-content">
+                <div class="modal-qr-left">
+                  <img src="./files/zalo-qr-placeholder.png" alt="Zalo QR Code" class="modal-qr-image">
+                </div>
+                <div class="modal-qr-right">
+                  <a href="https://zalo.me/" target="_blank" class="modal-zalo-button">Liên hệ Zalo</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-right-col">
+            <h2 class="modal-product-title" id="modal-product-title"></h2>
+            <p class="modal-product-brand">TVP Blogger</p>
+            <hr class="modal-divider">
+
+            <div class="modal-info-cards">
+              <div class="modal-info-card">💰 Giá: <span id="modal-price">N/A</span></div>
+              <div class="modal-info-card">⏳ Thời hạn: <span id="modal-duration">N/A</span></div>
+              <div class="modal-info-card">🛡️ Bảo hành: <span id="modal-warranty">N/A</span></div>
+              <div class="modal-info-card">⚡ Giao hàng: <span id="modal-delivery">N/A</span></div>
+            </div>
+
+            <ul class="modal-features-list" id="modal-features-list">
+              <li>Nội dung chi tiết chưa được cung cấp.</li>
+            </ul>
+          </div>
+        </div>
+       </div>
+</main>
+  
+   
+  <footer class="tvp-site-footer">
+      	<div class="tvp-footer__content">
+				<p class="tvp-footer__copyright">©️ 2026 TVP-BLOGGER. All rights reserved</p>
+				<p class="tvp-footer__copyright">©️2026 TVP BLOGGER, LTD ALL RIGHTS RESERVED.UNAUTHORIZED COMMERCIAL USE OR PUBLICATION</p>
+				<p class="tvp-footer__details"><span>Ho Chi Minh City, Viet Nam</span><span>Hotline: (+84) 912 665 729</span><span>Email: vuongphap0990@gmail.com</span><span>24/7 online days</span></p>		
+			</div>
+      <ul class="social-links" aria-label="Social media">			
+				<li><a href="https://github.com/Phap-studio" class="social-links__button" data-social="Github" target="_blank" rel="noopener noreferrer" aria-label="Github"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.835 2.809 1.305 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.602.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a></li>
+					<li><a href="https://www.facebook.com/vphapaccount"" class="social-links__button" data-social="Facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.6 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5H17V3.9c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4V10H8.2v3h2.6v8h2.8Z"/></svg></a></li>
+					<li><a href="https://www.instagram.com/_tranvuongphap_/" class="social-links__button" data-social="Instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.7" r="1" class="social-links__dot"/></svg></a></li>
+				
+				</ul>
+    </footer>
+  
+  <!-- Scripts -->
+  <script src="./js/slideshow.js"></script>
+  <script src="./js/products.js?v=20261118-shop-images"></script>
+  <script src="./js/modal.js"></script>
+  <script src="./js/products-render.js?v=20261118-fast-render"></script>
+
+  <!-- Floating Actions Logic -->
+  <script src="./js/floating-actions.js" defer></script>
+  <nav class="mobile-bottom-nav" aria-label="Điều hướng chính">
+    <a class="mobile-bottom-nav__item" href="./index.html" data-page="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg><span>Home</span></a>
+    <a class="mobile-bottom-nav__item" href="./shop.html" data-page="shop.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16l1 13H3L4 8Zm4 0a4 4 0 0 1 8 0"/></svg><span>Shop</span></a>
+    <a class="mobile-bottom-nav__item" href="./Coming Up.html" data-page="Coming Up.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 9h18m-11 3 5 3-5 3z"/></svg><span>Coming</span></a>
+    <a class="mobile-bottom-nav__item" href="./feedback.html" data-page="feedback.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v13H9l-5 4z"/><path d="M8 9h8M8 13h5"/></svg><span>Feedback</span></a>
+  </nav>
+  <nav id="fb-mobile-menu" aria-label="Menu">
+    <a href="./index.html">HOME</a>
+    <a href="./shop.html">SHOP</a>
+    <a href="./Coming Up.html">COMING UP</a>
+    <a href="./feedback.html">FEEDBACK</a>
+  </nav>
+  <script>
+    document.addEventListener('click', function (e) {
+      var menu = document.getElementById('fb-mobile-menu');
+      if (e.target.closest('[data-fls-menu], .menu__icon')) {
+        menu.classList.toggle('open');
+      } else if (!e.target.closest('#fb-mobile-menu')) {
+        menu.classList.remove('open');
+      }
+    });
+  </script>
+  <script src="./js/mobile-bottom-nav.js" defer></script>
+</body>
+</html>

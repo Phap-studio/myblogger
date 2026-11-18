@@ -1,0 +1,689 @@
+/* ==========================================================================
+   Cinematic SVG Feedback Page Styles
+   ========================================================================== */
+
+/* --- Variables & Base --- */
+:root {
+  --fb-bg: #080808;
+  --fb-text: #FFFFFF;
+  --fb-text-secondary: #9e9e9e;
+  --fb-border: rgba(255, 255, 255, 0.1);
+  --fb-border-hover: rgba(255, 255, 255, 0.25);
+  --fb-accent: #a38b63; /* Champagne Gold */
+  --fb-accent-glow: rgba(163, 139, 99, 0.3);
+  --fb-star-color: #FFC700;
+  --fb-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --fb-ease: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --fb-ease-out: cubic-bezier(0.22, .61, .36, 1);
+  --animation-stagger: 150ms;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes draw-in {
+  to { stroke-dashoffset: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.feedback-page-body {
+  background-color: var(--fb-bg);
+  background-image: linear-gradient(rgba(8, 8, 8, 0.24), rgba(8, 8, 8, 0.38)), url("../files/optimized/feedback-background.jpg");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  color: var(--fb-text);
+  font-family: var(--fb-font);
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.feedback-page-body .wrapper {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.feedback-page-body .feedback-main {
+  background: transparent;
+}
+
+.feedback-page-body .tvp-site-footer {
+  margin-top: auto;
+  background-color: #101010;
+}
+
+.feedback-main {
+  flex: 1 0 auto;
+  width: 100%;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  padding-top: 80px; /* Space for fixed navbar */
+  padding-bottom: 4rem;
+}
+
+.feedback-container-large {
+  width: min(100% - 3rem, 1100px);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+/* --- Hero Section --- */
+.feedback-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  padding: 2rem 0;
+  isolation: isolate;
+}
+
+.feedback-hero__bg-svg {
+  /* Đã xóa position: absolute để đưa SVG vào luồng bình thường */
+  position: relative; /* Giữ lại để các phần tử con có thể định vị tương đối nếu cần */
+  width: 100%;
+  max-width: 350px; /* Giảm kích thước để nhỏ hơn chữ FEEDBACK */
+  height: clamp(50px, 10vw, 80px); /* Chiều cao linh hoạt */
+  margin-bottom: 1.5rem; /* Tạo khoảng cách với chữ FEEDBACK bên dưới */
+  z-index: 1; /* Đảm bảo nó nằm trên các phần tử nền khác */
+  opacity: 0.8; /* Tăng độ rõ nét */
+  /* Đã xóa top, left, transform, và z-index: -1 */
+  transform: translateX(30px); /* Dịch chuyển SVG sang phải một chút */
+}
+
+/* --- TVP Logo Drawing Animation --- */
+.tvp-logo-path {
+  stroke-dasharray: 300; /* Giá trị đủ lớn cho tất cả các path */
+  stroke-dashoffset: 300;
+  animation: draw-in 2s var(--fb-ease-out) forwards;
+}
+
+/* Animation delay cho từng chữ cái để vẽ tuần tự */
+.tvp-logo-path:nth-child(2) {
+  /* Chữ V */
+  animation-delay: 0.4s;
+}
+
+.tvp-logo-path:nth-child(3) {
+  /* Chữ P */
+  animation-delay: 0.8s;
+}
+
+.feedback-hero-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(3.5rem, 10vw, 7rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--fb-text);
+  opacity: 0;
+  animation: fadeIn 1s var(--fb-ease-out) forwards;
+  animation-delay: calc(1 * var(--animation-stagger));
+}
+
+.feedback-hero__subtitle {
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  color: var(--fb-text-secondary);
+  margin-top: 1rem;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+  opacity: 0;
+  animation: fadeIn 1s var(--fb-ease-out) forwards;
+  animation-delay: calc(2 * var(--animation-stagger));
+}
+
+/* --- Review Trigger --- */
+.review-trigger-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  padding: 1.25rem 1.5rem;
+  cursor: pointer;
+  transition: transform 0.3s var(--fb-ease-out);
+  opacity: 0;
+  animation: fadeIn 1s var(--fb-ease-out) forwards;
+  animation-delay: calc(3 * var(--animation-stagger));
+}
+
+.review-trigger__border {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.review-trigger__border-rect {
+  fill: transparent;
+  stroke: var(--fb-border);
+  stroke-width: 1px;
+  transition: stroke 0.3s var(--fb-ease-out);
+  stroke-dasharray: 2000; /* Approximate perimeter, must be >= actual perimeter */
+  stroke-dashoffset: 2000; /* Start with the border fully "undrawn" */
+  animation: draw-in 2s var(--fb-ease-out) forwards;
+  animation-delay: calc(3 * var(--animation-stagger));
+}
+
+.review-trigger-wrapper:hover .review-trigger__border-rect,
+.review-trigger-wrapper:focus-visible .review-trigger__border-rect {
+  stroke: var(--fb-border-hover);
+}
+
+.review-trigger-wrapper:hover {
+  transform: translateY(-3px);
+}
+
+.review-trigger-placeholder {
+  color: var(--fb-text-secondary);
+  font-size: 1rem;
+  transition: color 0.3s var(--fb-ease-out);
+}
+
+.review-trigger-wrapper:hover .review-trigger-placeholder {
+  color: var(--fb-text);
+}
+
+/* --- Thank You Message --- */
+.thank-you-message {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+}
+
+.thank-you-message .review-trigger__border-rect {
+  stroke: var(--fb-accent);
+  stroke-dashoffset: 0; /* Already drawn */
+  box-shadow: 0 0 25px var(--fb-accent-glow);
+}
+
+.thank-you-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: var(--fb-text);
+}
+.thank-you-subtitle {
+  color: var(--fb-text-secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* --- Modals --- */
+.modal-overlay, .auth-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.modal-overlay.visible, .auth-modal-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  font-size: 1.75rem;
+  color: var(--fb-text-secondary);
+  cursor: pointer;
+  background: none;
+  border: none;
+  line-height: 1;
+  padding: 0.5rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.modal-close-btn:hover {
+  color: var(--fb-text);
+  transform: rotate(90deg);
+}
+
+/* Base Modal Content for animation */
+.modal-content {
+  transform: scale(0.98);
+  opacity: 0;
+  transition: transform 180ms cubic-bezier(0.4, 0, 0.2, 1), opacity 150ms ease-out;
+  will-change: transform, opacity;
+  background-color: #121212;
+  border: 1px solid var(--fb-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+/* Review Modal Specifics */
+.review-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+  padding: 2rem;
+  border-radius: 16px;
+  width: min(90%, 500px);
+}
+.review-modal-content h3 { font-size: 1.5rem; font-weight: 700; margin: 0; }
+
+.star-rating-interactive {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+}
+.star-rating-interactive .star {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #9a9a9a;
+  touch-action: manipulation;
+}
+.star-rating-interactive .star svg {
+  width: 36px;
+  height: 36px;
+  transition: transform 0.2s var(--fb-ease-out);
+}
+.star-rating-interactive .star:hover svg {
+  transform: scale(1.15);
+}
+.star-rating-interactive .star svg path {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 0;
+  stroke: currentColor;
+  fill: transparent;
+  transition: stroke-dashoffset 0.4s var(--fb-ease-out), fill 0.3s ease;
+}
+.star-rating-interactive .star:hover svg path,
+.star-rating-interactive .star.hover svg path {
+  stroke-dashoffset: 0;
+  stroke: var(--fb-star-color);
+}
+.star-rating-interactive .star.selected svg path {
+  stroke-dashoffset: 0;
+  stroke: var(--fb-star-color);
+  fill: var(--fb-star-color);
+}
+
+.feedback-textarea-wrapper { position: relative; width: 100%; }
+#feedback-textarea {
+  width: 100%;
+  padding: 1rem;
+  padding-bottom: 2rem;
+  background-color: #0c0c0c;
+  border: 1px solid var(--fb-border);
+  border-radius: 8px;
+  color: var(--fb-text);
+  font-family: inherit;
+  font-size: 1rem;
+  resize: vertical;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+#feedback-textarea:focus {
+  outline: none;
+  border-color: var(--fb-accent);
+  box-shadow: 0 0 0 3px var(--fb-accent-glow);
+}
+.char-counter { position: absolute; bottom: 0.75rem; right: 1rem; font-size: 0.8rem; color: var(--fb-text-secondary); }
+
+.submit-btn-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.submit-btn__border {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.submit-btn__border-rect {
+  fill: transparent;
+  stroke: var(--fb-accent);
+  stroke-width: 1.5px;
+  stroke-dasharray: 20 1000; /* Small dash, large gap */
+  transition: stroke-dashoffset 0.4s var(--fb-ease-out);
+}
+
+.submit-btn-wrapper:hover:not(:has(:disabled)) .submit-btn__border-rect {
+  stroke-dashoffset: -1020; /* Move the dash around */
+}
+
+.modal-submit-btn {
+  width: 100%;
+  padding: 0.85rem 2rem;
+  background: var(--fb-accent);
+  color: var(--fb-text);
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+.modal-submit-btn:hover:not(:disabled) {
+  background: #8a7450;
+}
+.modal-submit-btn:disabled { background: #333; color: #666; cursor: not-allowed; border-color: #444; }
+
+.modal-submit-btn .btn-text { transition: opacity 0.2s ease; }
+.modal-submit-btn.loading .btn-text { opacity: 0; }
+.btn-loader {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.modal-submit-btn.loading .btn-loader { opacity: 1; }
+.btn-loader::after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border: 2px solid #fff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Auth Modal Specifics */
+.auth-modal-content {
+  text-align: center;
+  width: min(90%, 580px);
+  background-color: #121212;
+  border-radius: 20px;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+.auth-modal-content h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+.auth-modal-content p {
+  color: var(--fb-text-secondary);
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+.modal-overlay.visible .modal-content,
+.auth-modal-overlay.visible .auth-modal-content {
+  transform: scale(1);
+  opacity: 1;
+}
+
+
+/* View container */
+.auth-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.auth-view-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+}
+.auth-button {
+  height: 46px;
+  padding: 0 2rem;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: grid;
+  place-items: center;
+  flex: 1;
+  max-width: 180px;
+}
+/* Main auth modal buttons */
+.auth-button,
+.validation-alert-content .modal-submit-btn {
+  background-color: var(--fb-accent);
+  color: var(--fb-text);
+}
+.auth-button:hover,
+.validation-alert-content .modal-submit-btn:hover {
+  background-color: #8a7450;
+}
+/* Back button */
+.auth-back-btn {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--fb-text-secondary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  line-height: 1;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.auth-back-btn:hover {
+  color: var(--fb-text);
+  transform: translateX(-3px);
+}
+
+/* Form Styles */
+.auth-form { width: 100%; display: flex; flex-direction: column; gap: 1rem; text-align: left; margin-top: 1.5rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.form-group label { font-size: 0.875rem; font-weight: 500; color: var(--fb-text-secondary); }
+.form-input { background-color: #0c0c0c; border: 1px solid var(--fb-border); border-radius: 8px; padding: 0.75rem 1rem; color: var(--fb-text); font-size: 1rem; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+.form-input:focus { outline: none; border-color: var(--fb-accent); box-shadow: 0 0 0 3px var(--fb-accent-glow); }
+.auth-submit-btn { margin-top: 1rem; width: 100%; }
+
+/* Validation Alert Modal Specifics */
+.validation-alert-content {
+  text-align: center;
+  width: min(90%, 400px);
+  padding: 2rem;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+.validation-alert-content h3 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+.validation-alert-content p {
+  color: var(--fb-text-secondary);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.5;
+}
+
+/* --- Toast Notification --- */
+.feedback-toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: #1a1a1a;
+  color: var(--fb-text);
+  padding: 0.8rem 1.25rem;
+  border-radius: 8px;
+  border: 1px solid var(--fb-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  z-index: 2000;
+  opacity: 0;
+  transform: translateY(20px);
+  visibility: hidden;
+  transition: all 0.4s var(--fb-ease);
+}
+.feedback-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+.toast-icon {
+  width: 20px;
+  height: 20px;
+  color: #28a745; /* Green checkmark */
+}
+.toast-message { font-size: 0.9rem; font-weight: 500; }
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .feedback-container-large { width: min(100% - 2rem, 1100px); }
+  .feedback-main { padding: 4rem 0; }
+  .auth-view-actions { flex-direction: column; }
+  .auth-button { max-width: 100%; }
+  .star-rating-interactive .star svg { width: 32px; height: 32px; }
+  .star-rating-interactive { gap: 0.25rem; }
+  .star-rating-interactive .star { display: grid; width: 40px; height: 40px; place-items: center; }
+}
+
+/* ==========================================================================
+   REFINED: Navbar Layout & Style
+   ========================================================================== */
+
+/*
+  Các quy tắc tinh chỉnh Navbar đã được chuyển vào khối ghi đè bên dưới
+  để hợp nhất và tránh xung đột. Phần này có thể được dọn dẹp.
+  Để an toàn, tôi sẽ chỉ bình luận lại thay vì xóa.
+*/
+/*
+  .header__container { max-width: 1440px; margin: 0 auto; padding: 0 2rem; }
+  .header__wrapper { min-height: 72px; }
+  @media (min-width: 48em) { .header__wrapper { min-height: 80px; } }
+  .menu__brand-logo { height: 48px; width: auto; object-fit: contain; transform: none !important; transition: opacity 0.3s ease; }
+  .menu__btn.btn { display: flex; align-items: center; }
+  .btn__label { display: none; }
+  .header__menu { justify-content: space-between; }
+  .menu__list { gap: 2.5rem; }
+  .menu__link { text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em; font-size: 0.875rem; transition: color 0.2s ease, opacity 0.2s ease; }
+  .menu__link:hover { color: #fff; opacity: 0.8; }
+*/
+
+/* ==========================================================================
+   FIX: Navbar Overlay & Transparency
+   ========================================================================== */
+/*
+  **Mục tiêu cuối cùng: Navbar trong suốt và nằm đè lên Hero Section.**
+  
+  **Giải pháp tổng hợp:**
+  1.  **Định vị lại Header**: Ghi đè `position: sticky` thành `position: absolute` để nó
+      trở thành một lớp overlay.
+  2.  **Loại bỏ nền**: Ẩn `div.header__background` và đảm bảo header trong suốt khi
+      chưa cuộn bằng cách nhắm vào selector `:not(._header-scroll)`.
+  3.  **Loại bỏ khoảng trống**: Reset `padding-top` của `.feedback-main` về 0 để
+      hero section nằm ngay dưới header.
+  4.  **Duy trì hiệu ứng cuộn**: Giữ nguyên các quy tắc cho `._header-scroll` và
+      `._header-hide` để có hiệu ứng nền mờ và tự động ẩn khi cuộn.
+*/
+
+/* === BƯỚC 1: PADDING CHO MAIN CONTENT ===
+   Giữ padding-top để nội dung không bị header fixed che khuất.
+   (Được xử lý bởi index.min.css: body.feedback-page-body .feedback-main { padding-top: 80px }) */
+
+/* === BƯỚC 2: NAVBAR ĐÃ ĐƯỢC XỬ LÝ BỞI index.min.css ===
+   Header có nền đen đặc, position:fixed, full-width.
+   Không override ở đây để tránh xung đột. */
+
+/* Keep feedback dialogs within short mobile screens. */
+@media (max-width: 47.99875rem) {
+  .modal-overlay,
+  .auth-modal-overlay {
+    padding: max(0.75rem, env(safe-area-inset-top)) 0.75rem max(0.75rem, env(safe-area-inset-bottom));
+  }
+
+  .review-modal-content,
+  .auth-modal-content {
+    width: 100%;
+    max-height: calc(100dvh - 1.5rem);
+    overflow-y: auto;
+    padding: clamp(1rem, 5vw, 1.5rem);
+  }
+}
+
+#floating-actions-container {
+  display: none;
+}
+#fb-mobile-menu { display: none; }
+
+@media (max-width: 47.99875rem) {
+  #fb-mobile-menu {
+    display: flex;
+    position: fixed;
+    top: 4.5rem;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    background: #101010;
+    text-align: center;
+    border-bottom: 1px solid #232323;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-12px);
+    transition: opacity .3s ease, transform .3s ease, visibility 0s linear .3s;
+  }
+
+  #fb-mobile-menu.open,
+  html.menu-open #fb-mobile-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+    transition: opacity .3s ease, transform .3s ease, visibility 0s;
+  }
+
+  #fb-mobile-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .3s ease, transform .3s ease;
+  }
+
+  #fb-mobile-menu.open a,
+  html.menu-open #fb-mobile-menu a {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  #fb-mobile-menu.open a:nth-child(1), html.menu-open #fb-mobile-menu a:nth-child(1) { transition-delay: .05s; }
+  #fb-mobile-menu.open a:nth-child(2), html.menu-open #fb-mobile-menu a:nth-child(2) { transition-delay: .10s; }
+  #fb-mobile-menu.open a:nth-child(3), html.menu-open #fb-mobile-menu a:nth-child(3) { transition-delay: .15s; }
+  #fb-mobile-menu.open a:nth-child(4), html.menu-open #fb-mobile-menu a:nth-child(4) { transition-delay: .20s; }
+}
